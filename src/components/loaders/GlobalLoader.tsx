@@ -5,7 +5,7 @@ export default function GlobalLoader() {
     return (
         <>
             <div className='position-absolute top-50 start-50 transform-middle'>
-                <Spinner name="pacman" color="#1194F6" />
+                <Spinner name="ball-scale-multiple" color="#1194F6" />
             </div>
         </>
     )

@@ -1,11 +1,11 @@
 import React from 'react';
-import GlobalLoader from './components/loaders/GlobalLoader';
+import Routers from './routers/Routers';
 
 
 function App() {
   return (
     <>
-      <GlobalLoader />
+      <Routers />
     </>
   );
 }
