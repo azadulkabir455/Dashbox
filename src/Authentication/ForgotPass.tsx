@@ -16,7 +16,7 @@ export default function ForgotPass() {
                     </div>
                     <div className="col-12 col-lg-4">
                         <div className="formContainer p-4 shadow">
-                            <form>
+                            {/* <form>
                                 <SingleInput
                                     label={"email"}
                                     inputType={"email"}
@@ -25,7 +25,7 @@ export default function ForgotPass() {
                                 <div className="d-grid">
                                     <button className='btn btn-md btn-primary'>Reset Password</button>
                                 </div>
-                            </form>
+                            </form> */}
                             <p className='text-center mt-2'><Link to="/login" className='text-primary text-decoration-none '>Back to login page</Link></p>
                         </div>
                     </div>
