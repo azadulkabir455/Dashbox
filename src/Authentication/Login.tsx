@@ -12,30 +12,18 @@ const Login: FC = () => {
     errorEmail: string,
     errorPassword: string
   }
-  const [inputs, setInputs] = useState<inputsType>({email:'', password:''} as inputsType);
+  const [inputs, setInputs] = useState<inputsType>({
+    email:'',
+    password:''} as inputsType);
   const [error, setError] = useState<errorType>({
     errorEmail: "",
     errorPassword: ""
   } as errorType)
+  console.log(error)
 
   const inputsHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setInputs(values => ({ ...values, [name]: value }));
-    
-    // Form Validation
-    let errorMsg = {} as errorType;
-
-    if (!/\S+@\S+\.\S+/.test(inputs.email) && inputs.email?.length > 0) {
-      errorMsg.errorEmail = "Email is not valided"
-    } else {
-      errorMsg.errorEmail = ""
-    }
-    if (inputs.password?.length < 6 && inputs.password?.length > 0) {
-      errorMsg.errorPassword = "Password must be 6 charecter or more"
-    } else {
-      errorMsg.errorPassword = ""
-    }
-    setError((error) => ({ ...error, ...errorMsg }))
   }
   const submitHandler = (e: React.SyntheticEvent) => {
     e.preventDefault();
@@ -43,10 +31,18 @@ const Login: FC = () => {
     let errorMsg = {} as errorType;
     if (!inputs.email) {
       errorMsg.errorEmail = "Must be provided email"
+    } else if (!/\S+@\S+\.\S+/.test(inputs.email)) {
+      errorMsg.errorEmail = "Email is not valided"
+    } else {
+      errorMsg.errorEmail = ""
     }
 
     if (!inputs.password) {
       errorMsg.errorPassword = "Must be provided passward"
+    } else if (inputs.password?.length < 6 && inputs.password?.length > 0) {
+      errorMsg.errorPassword = "Password must be 6 charecter or more"
+    } else {
+      errorMsg.errorPassword = ""
     }
     setError((error) => ({ ...error, ...errorMsg }))
   }
@@ -62,7 +58,7 @@ const Login: FC = () => {
           </div>
           <div className="col-12 col-lg-4">
             <div className="formContainer p-4 shadow">
-              <form onSubmit={submitHandler}>
+              <form onSubmit={submitHandler} noValidate={true}>
                 <SingleInput
                   label="email"
                   inputType="email"

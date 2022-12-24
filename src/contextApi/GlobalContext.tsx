@@ -4,7 +4,7 @@ const GlobalContextProvider = createContext({});
 
 // Props for children
 type Props = {
-    children: JSX.Element
+    children: React.ReactNode; 
 }
 const GlobalContextConsumer:FC<Props> = ({children}) => {
     return(
