@@ -1,13 +1,13 @@
-import React,{FC,createContext} from 'react'
-
+import React, { FC, createContext } from 'react'
 const GlobalContextProvider = createContext({});
 
 // Props for children
 type Props = {
-    children: React.ReactNode; 
+    children: React.ReactNode;
 }
-const GlobalContextConsumer:FC<Props> = ({children}) => {
-    return(
+const GlobalContextConsumer: FC<Props> = ({ children }) => {
+
+    return (
         <GlobalContextProvider.Provider value={{}}>
             {children}
         </GlobalContextProvider.Provider>

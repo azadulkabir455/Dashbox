@@ -19,7 +19,6 @@ const Login: FC = () => {
     errorEmail: "",
     errorPassword: ""
   } as errorType)
-  console.log(error)
 
   const inputsHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -38,7 +37,7 @@ const Login: FC = () => {
     }
 
     if (!inputs.password) {
-      errorMsg.errorPassword = "Must be provided passward"
+      errorMsg.errorPassword = "Must be provided password"
     } else if (inputs.password?.length < 6 && inputs.password?.length > 0) {
       errorMsg.errorPassword = "Password must be 6 charecter or more"
     } else {
@@ -67,19 +66,21 @@ const Login: FC = () => {
                   inputValue={inputs.email}
                   handleChange={(e) => inputsHandler(e)}
                 />
-                {error.errorEmail && <small className='text-danger'>{error.errorEmail}</small>}
+                {error.errorEmail && <small className='text-danger position-absolute'>{error.errorEmail}</small>}
 
                 <SingleInput
-                  label={"password"}
-                  inputType={"password"}
+                  label="password"
+                  inputType="password"
                   iconElement={<BsFillKeyFill />}
-                  inputPlaceholder={"Write your email.."}
+                  inputPlaceholder="Write your email.."
                   inputValue={inputs.password}
+                  toggleEyeShow = {true}
                   handleChange={(e) => inputsHandler(e)}
+                  
                 />
-                {error.errorPassword && <small className='text-danger'>{error.errorPassword}</small>}
+                {error.errorPassword && <small className='text-danger position-absolute'>{error.errorPassword}</small>}
 
-                <div className="form-check mb-3 mt-3">
+                <div className="form-check mb-3 mt-4">
                   <input className="form-check-input" type="checkbox" value="" id="rememberme" />
                   <label className=" form-check-label" htmlFor="rememberme">
                     Remember me
