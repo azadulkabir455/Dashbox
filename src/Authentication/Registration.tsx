@@ -1,28 +1,38 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { BsPersonFill, BsFillTelephoneFill, BsFillEnvelopeFill, BsKeyFill } from "react-icons/bs";
 import { Link } from 'react-router-dom';
 import SingleInput from '../components/FromInput/SingleInput'
 import RegistrationFormValidation from './RegistrationFormValidation';
-import { inputsType, errInputsType } from "../assets/TsType/TypeScriptTypes"
+import { AuthContextProvider } from '../contextApi/AuthContext';
+import { registrationInputsType, registrationErrInputsType } from "../assets/TsType/TypeScriptTypes"
 import "../assets/css/authCSS/registration.scss"
+import { toast } from 'react-toastify';
 
 export default function Registration() {
-    const [inputs, setInputs] = useState<inputsType>({
+    const [inputs, setInputs] = useState<registrationInputsType>({
         name: "",
         phone: "",
         email: "",
         username: "",
         password: "",
         confirmPassword: ""
-    } as inputsType);
-    const [error, setError] = useState<errInputsType>({
+    } as registrationInputsType);
+
+    const [error, setError] = useState<registrationErrInputsType>({
         errName: "",
         errPhone: "",
         errEmail: "",
         errUsername: "",
         errPassword: "",
         errConfirmPassword: ""
-    } as errInputsType)
+    } as registrationErrInputsType)
+
+    // Sign Up Data
+    const {email, password, confirmPassword, ...restInputData} = inputs;
+    const userData = {...restInputData, role:"user", img:""}
+
+    // Auth Context
+    const { signUp }: any = useContext(AuthContextProvider);
 
     // Fuction call for validatin
     const { errMsg } = RegistrationFormValidation(inputs);
@@ -36,7 +46,13 @@ export default function Registration() {
     // From Submit With Data validation
     const submitHandler = (e: React.SyntheticEvent) => {
         e.preventDefault();
-        setError((errors) => ({ ...error, ...errMsg }))
+        setError((errors) => ({ ...error, ...errMsg }));
+        const errorCheck = Object.values(error).every((value) => value === "")
+        if(errorCheck) {
+            signUp(email, password, {...userData})
+        } else {
+            toast("Please correct your inputs!", {type: "error"})
+        }
     }
     return (
         <>
@@ -113,7 +129,7 @@ export default function Registration() {
                                         inputPlaceholder="Confirm password"
                                         inputValue={inputs.confirmPassword}
                                         handleChange={(e) => { inputHandler(e) }}
-                                        toggleEyeShow = {true}
+                                        toggleEyeShow={true}
                                     />
                                     {error.errConfirmPassword && <small className="text-danger position-absolute">{error.errConfirmPassword}</small>}
                                 </div>

@@ -1,16 +1,16 @@
 
-import {errInputsType, inputsType} from "../assets/TsType/TypeScriptTypes"
+import {registrationInputsType, registrationErrInputsType} from "../assets/TsType/TypeScriptTypes"
 
-const RegistrationFormValidation = (inputs: inputsType) => {
+const RegistrationFormValidation = (inputs: registrationInputsType) => {
 
     let errMsg = {
-        errName: "Hi",
-        errPhone: "Hi",
-        errEmail: "Hi",
-        errUsername: "Hi",
-        errPassword: "Hi",
-        errConfirmPassword: "Hi"
-    } as errInputsType;
+        errName: "",
+        errPhone: "",
+        errEmail: "",
+        errUsername: "",
+        errPassword: "",
+        errConfirmPassword: ""
+    } as registrationErrInputsType;
     
 
     if (!inputs.name) {

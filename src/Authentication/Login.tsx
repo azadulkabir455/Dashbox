@@ -1,49 +1,47 @@
-import React, { FC, useState } from 'react'
+import React, { FC, useState, useContext } from 'react'
 import { Link } from 'react-router-dom'
 import { BsFillEnvelopeFill, BsFillKeyFill } from "react-icons/bs";
+import { loginInputsType, loginErrType } from "../assets/TsType/TypeScriptTypes"
+import LoginFormValidation from './LoginFormValidation';
+import { AuthContextProvider } from '../contextApi/AuthContext';
 import SingleInput from '../components/FromInput/SingleInput';
+import { toast } from 'react-toastify';
 
 const Login: FC = () => {
-  type inputsType  = {
-    email: string,
-    password: string
-  }
-  type errorType = {
-    errorEmail: string,
-    errorPassword: string
-  }
-  const [inputs, setInputs] = useState<inputsType>({
-    email:'',
-    password:''} as inputsType);
-  const [error, setError] = useState<errorType>({
+
+  const [inputs, setInputs] = useState<loginInputsType>({
+    email: '',
+    password: ''
+  } as loginInputsType);
+
+  const [error, setError] = useState<loginErrType>({
     errorEmail: "",
     errorPassword: ""
-  } as errorType)
+  } as loginErrType)
 
+  // login data
+  const {email, password} = inputs;
+
+  // Auth context
+  const { signIn }: any = useContext(AuthContextProvider)
+
+  // Function Call for validation
+  const { errorMsg } = LoginFormValidation(inputs)
+
+  // Form Submit Handler
   const inputsHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setInputs(values => ({ ...values, [name]: value }));
   }
   const submitHandler = (e: React.SyntheticEvent) => {
     e.preventDefault();
-
-    let errorMsg = {} as errorType;
-    if (!inputs.email) {
-      errorMsg.errorEmail = "Must be provided email"
-    } else if (!/\S+@\S+\.\S+/.test(inputs.email)) {
-      errorMsg.errorEmail = "Email is not valided"
-    } else {
-      errorMsg.errorEmail = ""
-    }
-
-    if (!inputs.password) {
-      errorMsg.errorPassword = "Must be provided password"
-    } else if (inputs.password?.length < 6 && inputs.password?.length > 0) {
-      errorMsg.errorPassword = "Password must be 6 charecter or more"
-    } else {
-      errorMsg.errorPassword = ""
-    }
     setError((error) => ({ ...error, ...errorMsg }))
+    const errorCheck = Object.values(error).every((value) => value === "")
+    if (errorCheck) {
+      signIn(email, password)
+    } else {
+      toast("Please correct your inputs!", { type: "error" })
+    }
   }
   return (
     <>
@@ -74,9 +72,9 @@ const Login: FC = () => {
                   iconElement={<BsFillKeyFill />}
                   inputPlaceholder="Write your email.."
                   inputValue={inputs.password}
-                  toggleEyeShow = {true}
+                  toggleEyeShow={true}
                   handleChange={(e) => inputsHandler(e)}
-                  
+
                 />
                 {error.errorPassword && <small className='text-danger position-absolute'>{error.errorPassword}</small>}
 

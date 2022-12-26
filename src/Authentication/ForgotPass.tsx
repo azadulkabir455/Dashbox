@@ -1,7 +1,9 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { Link } from 'react-router-dom'
-import { BsFillEnvelopeFill} from "react-icons/bs";
+import { AuthContextProvider } from '../contextApi/AuthContext';
+import { BsFillEnvelopeFill } from "react-icons/bs";
 import SingleInput from '../components/FromInput/SingleInput';
+import { toast } from 'react-toastify';
 
 export default function ForgotPass() {
     const [email, setEmail] = useState<string>("");
@@ -9,18 +11,29 @@ export default function ForgotPass() {
     const emailHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
         setEmail(e.target.value);
     }
+
+    // Auth Context
+    const { resetPassword }: any = useContext(AuthContextProvider)
     const submitHandler = (e: React.SyntheticEvent) => {
         e.preventDefault();
 
-        let err : string = ""
-        if(!email) {
+        let err: string = ""
+        if (!email) {
             err = 'Email must be provide';
         } else if (!/\S+@\S+\.\S+/.test(email)) {
             err = "Email is not validate";
-        }else {
+        } else {
             err = ''
         }
         setEmailErr(err)
+
+        // Check error and reset password
+
+        if (emailErr === "") {
+            resetPassword(email)
+        } else {
+            toast("Please correct your inputs!", { type: "error" })
+        }
     }
     return (
         <>
@@ -41,8 +54,8 @@ export default function ForgotPass() {
                                     iconElement={<BsFillEnvelopeFill />}
                                     inputPlaceholder={"Write your email.."}
                                     inputValue={email}
-                                    handleChange = {emailHandler}
-                                    />
+                                    handleChange={emailHandler}
+                                />
                                 {emailErr && <small className="text-danger">{emailErr}</small>}
                                 <div className="d-grid mt-3">
                                     <button className='btn btn-md btn-primary'>Reset Password</button>

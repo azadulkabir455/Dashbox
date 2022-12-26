@@ -1,11 +1,9 @@
-import React, { FC, createContext } from 'react'
+import React, {createContext } from 'react'
+import { ContextApiChildrenType } from '../assets/TsType/TypeScriptTypes';
+
 const GlobalContextProvider = createContext({});
 
-// Props for children
-type Props = {
-    children: React.ReactNode;
-}
-const GlobalContextConsumer: FC<Props> = ({ children }) => {
+const GlobalContextConsumer = ({ children }: ContextApiChildrenType) => {
 
     return (
         <GlobalContextProvider.Provider value={{}}>

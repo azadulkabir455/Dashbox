@@ -4,6 +4,7 @@ import { BrowserRouter as Router } from "react-router-dom";
 import store from './store';
 import { Provider } from 'react-redux';
 import { GlobalContextConsumer } from './contextApi/GlobalContext';
+import { AuthContextConsumer } from './contextApi/AuthContext';
 import ErrorBoundary from './components/errorBoundary/ErrorBoundary';
 import { ToastContainer } from 'react-toastify';
 import App from './App';
@@ -24,10 +25,15 @@ root.render(
       <Router>
         <ErrorBoundary>
           <GlobalContextConsumer>
-            <>
-              <App />
-              <ToastContainer />
-            </>
+            <AuthContextConsumer>
+              <>
+                <App />
+                <ToastContainer 
+                  autoClose={3000}
+                  hideProgressBar={false} 
+                />
+              </>
+            </AuthContextConsumer>
           </GlobalContextConsumer>
         </ErrorBoundary>
       </Router>
