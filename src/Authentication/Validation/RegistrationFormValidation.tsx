@@ -1,5 +1,5 @@
 
-import {registrationInputsType, registrationErrInputsType} from "../assets/TsType/TypeScriptTypes"
+import {registrationInputsType, registrationErrInputsType} from "../../assets/TsType/TypeScriptTypes"
 
 const RegistrationFormValidation = (inputs: registrationInputsType) => {
 

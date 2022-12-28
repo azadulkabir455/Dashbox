@@ -1,5 +1,20 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@200;400;600;700&display=swap');
+
 * {
     padding:0;
     margin: 0;
     box-shadow: border-box;
 }
+
+body {
+    font-family: 'Nunito Sans', sans-serif;
+}
+$primaryColor: rgba(var(--bs-primary-rgb));
+$secondaryColor: rgba(var(--bs-secondary-rgb));
+$infoColor: rgba(var(--bs-info-rgb));
+$dangerColor: rgba(var(--bs-danger-rgb));
+$warningColor: rgba(var(--bs-warning-rgb));
+$blackColor: rgb(0, 0, 0);
+$grayColor: rgb(100, 100, 100);
+$whiteColor:rgb(255, 255, 255);
+$transparentColor: rgba(0, 0, 0, 0);

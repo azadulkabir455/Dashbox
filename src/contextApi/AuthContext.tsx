@@ -52,7 +52,7 @@ const AuthContextConsumer = ({ children }: ContextApiChildrenType) => {
     // logOut functionality
     const logOut = async () => {
         await signOut(auth).then(() => {
-            toast("Log Out Successfully!");
+            toast("Log Out S```uccessfully!");
             navigate("/login")
         }).catch((error) => {
             toast(error, { type: "success" })

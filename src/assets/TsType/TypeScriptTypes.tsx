@@ -43,3 +43,11 @@ export type dataType = {
         img: string,
     }
 }
+
+// Top Bar menu types
+
+export type dropDownMenuValues = {
+    menuIcon: React.ReactNode,
+    notificationCount?: number,
+    dropDownItems?: React.ReactNode
+}

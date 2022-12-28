@@ -1,4 +1,4 @@
-import {loginInputsType, loginErrType} from "../assets/TsType/TypeScriptTypes"
+import {loginInputsType, loginErrType} from "../../assets/TsType/TypeScriptTypes"
 
 const LoginFormValidation = (inputs:loginInputsType) => {
 

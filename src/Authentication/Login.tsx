@@ -2,9 +2,9 @@ import React, { FC, useState, useContext } from 'react'
 import { Link } from 'react-router-dom'
 import { BsFillEnvelopeFill, BsFillKeyFill } from "react-icons/bs";
 import { loginInputsType, loginErrType } from "../assets/TsType/TypeScriptTypes"
-import LoginFormValidation from './LoginFormValidation';
+import LoginFormValidation from './Validation/LoginFormValidation';
 import { AuthContextProvider } from '../contextApi/AuthContext';
-import SingleInput from '../components/FromInput/SingleInput';
+import SingleInput from '../components/fromInput/SingleInput';
 import { toast } from 'react-toastify';
 
 const Login: FC = () => {

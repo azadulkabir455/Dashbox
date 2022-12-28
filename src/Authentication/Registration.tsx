@@ -1,8 +1,8 @@
 import React, { useState, useContext } from 'react'
 import { BsPersonFill, BsFillTelephoneFill, BsFillEnvelopeFill, BsKeyFill } from "react-icons/bs";
 import { Link } from 'react-router-dom';
-import SingleInput from '../components/FromInput/SingleInput'
-import RegistrationFormValidation from './RegistrationFormValidation';
+import SingleInput from '../components/fromInput/SingleInput'
+import RegistrationFormValidation from './Validation/RegistrationFormValidation';
 import { AuthContextProvider } from '../contextApi/AuthContext';
 import { registrationInputsType, registrationErrInputsType } from "../assets/TsType/TypeScriptTypes"
 import "../assets/css/authCSS/registration.scss"
