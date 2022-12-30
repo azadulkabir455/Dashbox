@@ -51,3 +51,10 @@ export type dropDownMenuValues = {
     notificationCount?: number,
     dropDownItems?: React.ReactNode
 }
+
+export type languagesType = {
+    id: number,
+    img: string,
+    name: string,
+    selected: boolean
+}[]

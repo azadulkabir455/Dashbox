@@ -2,7 +2,7 @@ import React from 'react'
 import { dropDownMenuValues } from '../../../assets/TsType/TypeScriptTypes'
 import "../../../assets/css/menuCSS/dropDownMenu.scss"
 
-export default function DropDownMenu({ menuIcon, notificationCount, dropDownItems }: dropDownMenuValues) {
+export default function MenuItem({ menuIcon, notificationCount, dropDownItems }: dropDownMenuValues) {
     return (
         <>
             <li className="nav-item dropdown">
