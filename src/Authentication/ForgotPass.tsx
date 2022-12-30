@@ -61,7 +61,7 @@ export default function ForgotPass() {
                                     <button className='btn btn-md btn-primary'>Reset Password</button>
                                 </div>
                             </form>
-                            <p className='text-center mt-2'><Link to="/login" className='text-primary text-decoration-none '>Back to login page</Link></p>
+                            <p className='text-center mt-2'><Link to="/login" className='text-primary text-decoration-none '>Back to login page.</Link></p>
                         </div>
                     </div>
                 </div>
