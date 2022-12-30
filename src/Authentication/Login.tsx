@@ -4,7 +4,7 @@ import { BsFillEnvelopeFill, BsFillKeyFill } from "react-icons/bs";
 import { loginInputsType, loginErrType } from "../assets/TsType/TypeScriptTypes"
 import LoginFormValidation from './Validation/LoginFormValidation';
 import { AuthContextProvider } from '../contextApi/AuthContext';
-import SingleInput from '../components/fromInput/SingleInput';
+import SingleInput from './fromInput/SingleInput';
 import { toast } from 'react-toastify';
 
 const Login: FC = () => {

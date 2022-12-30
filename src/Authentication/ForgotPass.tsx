@@ -2,7 +2,7 @@ import React, { useState, useContext } from 'react'
 import { Link } from 'react-router-dom'
 import { AuthContextProvider } from '../contextApi/AuthContext';
 import { BsFillEnvelopeFill } from "react-icons/bs";
-import SingleInput from '../components/fromInput/SingleInput';
+import SingleInput from "./fromInput/SingleInput"
 import { toast } from 'react-toastify';
 
 export default function ForgotPass() {
