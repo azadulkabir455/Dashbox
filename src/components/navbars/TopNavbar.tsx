@@ -2,6 +2,7 @@ import React from 'react'
 import { BsMoonFill, BsGlobe2, BsCart3, BsFillEnvelopeFill, BsBellFill, BsGear } from "react-icons/bs";
 import MenuItem from './menuComponent/MenuItem';
 import LanguagesDropdownMenu from './menuComponent/LanguagesDropdownMenu';
+import DropdownMenuContainer from "../../components/navbars/menuComponent/DropdownMenuContainer"
 import { Images } from '../../assets/media/Media';
 import { Link } from 'react-router-dom';
 import "../../assets/css/menuCSS/topnav.scss"
@@ -21,9 +22,9 @@ export default function TopNavbar() {
                         <ul className="navbar-nav ms-auto mainMenu">
                             <MenuItem  menuIcon={<BsMoonFill />} />
                             <MenuItem  menuIcon={<BsGlobe2 />} dropDownItems={<LanguagesDropdownMenu />} />
-                            <MenuItem  menuIcon={<BsCart3 />} notificationCount={99} dropDownItems={"Action"} />
-                            <MenuItem  menuIcon={<BsFillEnvelopeFill />} notificationCount={99} dropDownItems={"Action"} />
-                            <MenuItem  menuIcon={<BsBellFill />} notificationCount={99} dropDownItems={"Action"} />
+                            <MenuItem  menuIcon={<BsCart3 />} notificationCount={99} dropDownItems={<DropdownMenuContainer/>} />
+                            <MenuItem  menuIcon={<BsFillEnvelopeFill />} notificationCount={99} dropDownItems={<DropdownMenuContainer/>} />
+                            <MenuItem  menuIcon={<BsBellFill />} notificationCount={99} dropDownItems={<DropdownMenuContainer/>} />
                         </ul>
                         <ul className="navbar-nav userMenu ps-2">
                             <li className="nav-item dropdown">

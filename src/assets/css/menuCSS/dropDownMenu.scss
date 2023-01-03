@@ -1,1 +1,12 @@
 @import "../global.scss";
+
+.nav-item.dropdown {
+    .mainDropdown.dropdown-menu.show {
+        display: none !important;
+    }
+
+    .dropdown-menu.active {
+        display: block !important;
+        top: 100%;
+    }
+}
