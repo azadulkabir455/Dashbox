@@ -1,6 +1,28 @@
 @import "../global.scss";
 
+@keyframes dropdownAnimation {
+    0% {
+        top: 80%;
+    }
+    50% {
+        top: 90%;
+    }
+    100% {
+        top: 100%
+    }
+}
+
 .nav-item.dropdown {
+    .mainDropdown:before {
+        content: "";
+        position: absolute;
+        bottom: 100%;
+        left: 0;
+        margin-left: 13px;
+        border-width: 10px;
+        border-style: solid;
+        border-color: transparent transparent #e2e2e2;
+    }
     .mainDropdown.dropdown-menu.show {
         display: none !important;
     }
@@ -8,5 +30,7 @@
     .dropdown-menu.active {
         display: block !important;
         top: 100%;
+        animation: dropdownAnimation .2s linear forwards;
     }
 }
+

@@ -1,5 +1,39 @@
 @import "../global.scss";
 
 .containerHeader {
-    min-width: 180px;
+    min-width: 240px;
+}
+
+.containerContent {
+    height: 220px;
+    max-height: 220px;
+    overflow: auto;
+
+    &::-webkit-scrollbar {
+        width: 3px;
+    }   
+
+    &::-webkit-scrollbar-thumb {
+        background-color: $primaryColor;
+    }
+
+    .active {
+        background-color: transparentize(#00779E, .9);
+    }
+    .dropdown-menu {
+        left: calc(100% - 180px);
+        .dropdown-item:active {
+            color: $whiteColor !important;
+        }
+    }
+}
+
+.settingDropdown.dropdown-toggle {
+    &:after {
+        display: none;
+    }
+
+    svg {
+        fill: $grayColor;
+    }
 }

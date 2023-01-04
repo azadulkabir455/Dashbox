@@ -58,3 +58,15 @@ export type languagesType = {
     name: string,
     selected: boolean
 }[]
+
+export interface DropDownMenuCotainerProps {
+    headerText: string;
+    buttonText:string;
+    deleteSettingsText: string;
+    children: React.ReactNode
+}
+
+export interface DropDownIndividualSettingsProps {
+    deleteText: string;
+    blockText: string;
+}

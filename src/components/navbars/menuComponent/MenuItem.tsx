@@ -3,24 +3,29 @@ import { dropDownMenuValues } from '../../../assets/TsType/TypeScriptTypes'
 import "../../../assets/css/menuCSS/dropDownMenu.scss"
 
 export default function MenuItem({ menuIcon, notificationCount, dropDownItems }: dropDownMenuValues) {
+    // Functionality modified for dropdown onclick
     const [showDropdown, setShowDropdown] = useState(false)
     const dropDownRef = useRef<HTMLUListElement>(null!);
+
+    // Fucntion for toggle dropdown show class
     const toggleClass = () => {
         setShowDropdown((value) => !value);
     }
+
+    // Function for hidden dropdown click anywhere except dropdown content
     useEffect(() => {
         const dropdownHideHandler = (event: any) => {
             if(!dropDownRef.current.contains(event.target)) {
                 setShowDropdown(false);
             }
         }
-        document.addEventListener("onclick", dropdownHideHandler)
+        document.addEventListener("mousedown", dropdownHideHandler)
     },[])
 
     return (
         <>
             <li className="nav-item dropdown">
-                <span className="nav-link dropdown-toggle" role="button" onClick={() => toggleClass()}>
+                <span className="nav-link" role="button" onClick={() => toggleClass()}>
                     <span className='position-relative'>
                         {menuIcon}
                         {notificationCount &&
