@@ -8,7 +8,7 @@ export default function DropdownMenuSettings({settingsText}:any) {
     <span className="settingDropdown dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
         <BsFillGearFill />
     </span>
-    <ul className="dropdown-menu ">
+    <ul className="dropdown-menu settingDropdownMenu">
         <li>
             <Link className="dropdown-item p-0 pb-2 text-muted" to="#">
                 <BsFillEnvelopeOpenFill /> <span className=' text-capitalize ps-1 fw-semibold'>Mark all is read</span>

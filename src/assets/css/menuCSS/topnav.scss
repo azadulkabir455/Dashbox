@@ -41,7 +41,7 @@
             }
 
             .dropdown-menu {
-                margin-top: 8px;
+                margin-top: 15px;
                 padding: 10px;
 
             }
@@ -76,10 +76,110 @@
             }
 
             .dropdown-menu {
-                margin-top: 8px;
+                margin-top: 10px;
                 padding: 10px;
+                &:before {
+                    content: "";
+                    position: absolute;
+                    bottom: 100%;
+                    left: 0;
+                    margin-left: 13px;
+                    border-width: 10px;
+                    border-style: solid;
+                    border-color: transparent transparent #e2e2e2;
+                }
 
             }
         }
+    }
+}
+
+// All Responsive Code
+
+@media only screen and (max-width: 992px) {
+    .navbar {
+        .mainMenuContainer {
+            .actionButton {
+                width: auto;
+                padding: 4px 6px;
+            }
+
+            .mainMenu {
+                position: absolute;
+                top: 58px;
+                right: 0;
+                padding: 10px 10px;
+                display: none;
+                background-color: $whiteColor;
+
+                .mainDropdown.dropdown-menu {
+                    right: 53px;
+                    margin-top: -45px;
+
+                    &::before {
+                        left: 100%;
+                        bottom: calc(100% - 30px);
+                        margin-left: 0;
+                        border-color: transparent transparent transparent #e2e2e2;
+                    }
+                }
+                .nav-item {
+                   .settingDropdownMenu.dropdown-menu {
+                        margin-left: -175px;
+                        min-width: 190px;
+                    }
+                }
+            }
+
+            .mainMenu.show {
+                display: block;
+            }
+        }
+
+        .userMenu {
+            .nav-item {
+                .dropdown-menu {
+                    left: -120px !important;
+
+                    &:before {
+                        left: 70%;
+                    }
+                }
+            }
+        }
+    }
+
+    .navbar-nav .dropdown-menu {
+        position: absolute;
+    }
+
+}
+
+@media only screen and (max-width: 410px) {
+    .navbar {
+        .navbar-brand {
+            img {
+                width: 130px;
+            }
+        }
+        .mainMenuContainer {
+            .mainMenu {
+                padding: 10px;
+                .mainDropdown {
+                    .containerHeader {
+                        min-width: 200px;
+                    }
+                }
+            }
+        }
+        .userMenu {
+            .nav-item {
+             .nav-link img {
+                width: 25px;
+                height: 25px;
+             }
+            }
+        }
+            
     }
 }

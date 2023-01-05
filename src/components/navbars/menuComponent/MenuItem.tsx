@@ -15,7 +15,7 @@ export default function MenuItem({ menuIcon, notificationCount, dropDownItems }:
     // Function for hidden dropdown click anywhere except dropdown content
     useEffect(() => {
         const dropdownHideHandler = (event: any) => {
-            if(!dropDownRef.current.contains(event.target)) {
+            if(!dropDownRef.current?.contains(event.target)) {
                 setShowDropdown(false);
             }
         }
