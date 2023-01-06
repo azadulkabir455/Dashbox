@@ -1,0 +1,39 @@
+@import "./global.scss";
+.sidebar {
+    position: fixed;
+    bottom: 0;
+    height: calc(100% - 82px);
+    width: 220px;
+    .dropdown {
+        button {
+            background: transparent;
+            border: transparent;
+            transition: all .3s linear;
+            width: 100%;
+            &:active {
+                background:transparent;
+            }
+            &:hover {
+                background-color: transparentize(#008CBA, .9);
+            }
+            &:after {
+                content: "\02C5";
+                border: none;
+                font-size: 16px;
+                font-weight: 500;
+                position: absolute;
+                right:10px;
+                transition: all .10s linear;
+            }
+        }
+        button.show {
+            background-color: transparentize(#008CBA, .9);
+            &:after {
+                transform: rotate(-90deg);
+            }
+        }
+    }
+    .dropdown-menu {
+        transform: translate(202px, 0px) !important;
+    }
+}

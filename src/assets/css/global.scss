@@ -5,7 +5,9 @@
     margin: 0;
     box-shadow: border-box;
 }
-
+html {
+    scroll-behavior: smooth;
+}
 body {
     font-family: 'Nunito Sans', sans-serif;
 }

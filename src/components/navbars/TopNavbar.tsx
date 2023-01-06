@@ -1,5 +1,5 @@
 import React,{useState,useEffect,useRef} from 'react'
-import { BsMoonFill, BsGlobe2, BsCart3, BsFillEnvelopeFill, BsBellFill, BsListNested, BsPersonCircle, BsDoorOpenFill } from "react-icons/bs";
+import { BsMoonFill, BsGlobe2, BsCart3, BsFillEnvelopeFill, BsBellFill, BsListNested, BsPersonCircle, BsBoxArrowRight } from "react-icons/bs";
 import MenuItem from './menuComponent/MenuItem';
 import LanguagesDropdownMenu from './menuComponent/LanguagesDropdownMenu';
 import { Images } from '../../assets/media/Media';
@@ -29,7 +29,7 @@ export default function TopNavbar() {
     return (
         <>
             <nav className="navbar navbar-expand-lg fixed-top border-bottom border-primary border-2 border-opacity-10">
-                <div className="container">
+                <div className="container-fluid">
                     <Link className="navbar-brand" to="/">
                         <img src={Images.brandLogo} alt="" />
                     </Link>
@@ -74,7 +74,7 @@ export default function TopNavbar() {
                                     </li>
                                     <li>
                                         <a className="dropdown-item p-1 fw-semibold text-capitalize d-flex align-items-center text-muted" href="/">
-                                            <BsDoorOpenFill className='me-1' />Log out
+                                            <BsBoxArrowRight className='me-1' />Log out
                                         </a>
                                     </li>
                                 </ul>
