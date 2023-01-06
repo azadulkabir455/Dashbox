@@ -70,3 +70,16 @@ export interface DropDownIndividualSettingsProps {
     deleteText: string;
     blockText: string;
 }
+
+// Sidebar props type
+
+export interface SidebarDropdownProps {
+    dropdownIcon: React.ReactNode,
+    dropdownName: string,
+    dropdownLink: string,
+}
+export interface SidebarMenuProps {
+    menuIcon: React.ReactNode,
+    menuName: string
+    dropdownContents?: SidebarDropdownProps[]
+}
