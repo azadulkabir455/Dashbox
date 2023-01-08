@@ -60,7 +60,11 @@
         transform: translate(182px, 0px) !important;
     }
     .singleMenu {
-        transition: all .3s linear;
+        span {
+            transition: all .3s linear;
+            width: auto;
+            opacity: 1;
+        }
         svg {
             font-size: 14px;
         }
