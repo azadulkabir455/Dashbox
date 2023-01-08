@@ -80,6 +80,7 @@ export interface SidebarDropdownProps {
 }
 export interface SidebarMenuProps {
     menuIcon: React.ReactNode,
-    menuName: string
+    menuName: string,
+    menuLink?: string,
     dropdownContents?: SidebarDropdownProps[]
 }

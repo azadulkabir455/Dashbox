@@ -8,6 +8,10 @@ const Login = lazy(() => import("../Authentication/Login"))
 const Registration = lazy(() => import("../Authentication/Registration"))
 const ForgotPass = lazy(() => import("../Authentication/ForgotPass"))
 
+// Dashboard Pages
+
+const Dashbord = lazy(() => import("../pages/Dashbord"))
+
 // Pages
 const Home = lazy(() => import("../pages/Home"))
 export default function Routers() {
@@ -19,7 +23,9 @@ export default function Routers() {
             <Route path="/forgotPass" element={<ForgotPass />}/>
 
             {/* Pages */}
-            <Route path="/"  element={<Home />} />
+            <Route path="/"  element={<Home />}>
+              <Route index element={<Dashbord />} />
+            </Route>
         </Routes>
     </Suspense>
   )

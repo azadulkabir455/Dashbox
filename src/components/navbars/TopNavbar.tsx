@@ -28,7 +28,7 @@ export default function TopNavbar() {
     })
     return (
         <>
-            <nav className="navbar navbar-expand-lg fixed-top border-bottom border-primary border-2 border-opacity-10">
+            <nav className="navbar navbar-expand-lg fixed-top border-bottom border-primary border-2 border-opacity-10 bg-light">
                 <div className="container-fluid">
                     <Link className="navbar-brand" to="/">
                         <img src={Images.brandLogo} alt="" />

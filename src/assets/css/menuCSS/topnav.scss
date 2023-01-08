@@ -1,6 +1,7 @@
 @import "../global.scss";
 
 .navbar {
+    z-index: 9;
     .navbar-brand {
         img {
             max-width: 160px;
