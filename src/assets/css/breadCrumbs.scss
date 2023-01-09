@@ -1,0 +1,23 @@
+@import "./global.scss";
+
+.breadCrumbsContainer {
+    position: absolute;
+    right: 42px;
+    top: 30px;
+    display: flex;
+
+    .crumbs {
+        a {
+            font-size: 14px;
+            text-transform: capitalize;
+            &:last-child {
+                color: $grayColor;
+            }
+            &:not(:last-child):after {
+                content: "/";
+                font-size: 12px;
+                margin: 0 6px;
+            }
+        }
+    }
+}
