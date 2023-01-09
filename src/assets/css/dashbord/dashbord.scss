@@ -26,10 +26,12 @@
     }
     .last > .countContainer {
         min-height: 100% !important;
+        height: 160px;
         .countBgIcon {
             svg {
-            top: 60px;
+            top: 40px;
             font-size: 280px;
         }}
     }
 }
+

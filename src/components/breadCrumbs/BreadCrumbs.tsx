@@ -22,7 +22,7 @@ export default function BreadCrumbs() {
     return (
         <>
             <div className="breadCrumbsContainer">
-                <div className="crumbs text-capitalize">
+                <div className="crumbs">
                     <Link to="/" className=" text-decoration-none fw-semibold">Dashbord</Link>
                     {crumbs}
                 </div>
