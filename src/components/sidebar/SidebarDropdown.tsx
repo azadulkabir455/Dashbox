@@ -15,7 +15,7 @@ export default function SidebarDropdown({ menuIcon, menuName, menuLink, dropdown
                     <>
                         <button className="dropdown-toggle text-muted text-capitalize fw-semibold d-flex align-items-center p-2 rounded" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                             <Link className='text-decoration-none text-muted' to={`${menuLink && menuLink}`}>
-                                {menuIcon} <span className="ms-2">{menuName}</span>
+                                {menuIcon} <span className="ms-1">{menuName}</span>
                             </Link>
                         </button>
                         {

@@ -9,8 +9,13 @@ const Registration = lazy(() => import("../Authentication/Registration"))
 const ForgotPass = lazy(() => import("../Authentication/ForgotPass"))
 
 // Dashboard Pages
+const Dashbord = lazy(() => import("../pages/Dashbord/Dashbord"))
 
-const Dashbord = lazy(() => import("../pages/Dashbord"))
+// Post Pages
+
+const AllBlog = lazy(() => import("../pages/blogPosts/AddBlog"));
+const CreateBlog = lazy(() => import("../pages/blogPosts/CreateBlog"));
+const CreateCategories = lazy(() => import("../pages/blogPosts/CreateCategories"));
 
 // Pages
 const Home = lazy(() => import("../pages/Home"))
@@ -25,6 +30,11 @@ export default function Routers() {
             {/* Pages */}
             <Route path="/"  element={<Home />}>
               <Route index element={<Dashbord />} />
+              <Route path="allblog">
+                <Route index element={<AllBlog/>}/>
+                <Route path="createblog" element={<CreateBlog/>}/>
+                <Route path="createcetagories" element={<CreateCategories/>}/>
+              </Route>
             </Route>
         </Routes>
     </Suspense>

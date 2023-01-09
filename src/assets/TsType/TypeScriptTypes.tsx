@@ -84,3 +84,13 @@ export interface SidebarMenuProps {
     menuLink?: string,
     dropdownContents?: SidebarDropdownProps[]
 }
+
+// Dashbord props type
+
+export interface TotalCountProps {
+    countName: string,
+    countIcon: React.ReactNode,
+    countBgIcon: React.ReactNode,
+    countTotal: number,
+    countBg: string | number 
+}
