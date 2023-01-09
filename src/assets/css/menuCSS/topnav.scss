@@ -1,6 +1,8 @@
 @import "../global.scss";
 
 .navbar {
+    z-index: 9;
+
     .navbar-brand {
         img {
             max-width: 160px;
@@ -41,10 +43,12 @@
             }
 
             .dropdown-menu {
-                margin-top: 15px;
                 padding: 10px;
-
             }
+            .dropdown-menu.mainDropdown {
+                
+            }
+
         }
     }
 
@@ -78,6 +82,7 @@
             .dropdown-menu {
                 margin-top: 10px;
                 padding: 10px;
+
                 &:before {
                     content: "";
                     position: absolute;
@@ -95,6 +100,22 @@
 }
 
 // All Responsive Code
+
+@media only screen and (min-width: 993px) {
+    .navbar {
+        .mainMenuContainer {
+            .dropdown-menu.settingDropdownMenu {
+                min-width: 195px;
+                left: -180px;
+            }
+
+            .dropdown-menu.mainDropdown {
+                left: -40px;
+                margin-top: 15px;
+            }
+        }
+    }
+}
 
 @media only screen and (max-width: 992px) {
     .navbar {
@@ -123,8 +144,9 @@
                         border-color: transparent transparent transparent #e2e2e2;
                     }
                 }
+
                 .nav-item {
-                   .settingDropdownMenu.dropdown-menu {
+                    .settingDropdownMenu.dropdown-menu {
                         margin-left: -175px;
                         min-width: 190px;
                     }
@@ -155,6 +177,7 @@
 
 }
 
+
 @media only screen and (max-width: 410px) {
     .navbar {
         .navbar-brand {
@@ -162,9 +185,11 @@
                 width: 130px;
             }
         }
+
         .mainMenuContainer {
             .mainMenu {
                 padding: 10px;
+
                 .mainDropdown {
                     .containerHeader {
                         min-width: 200px;
@@ -172,14 +197,15 @@
                 }
             }
         }
+
         .userMenu {
             .nav-item {
-             .nav-link img {
-                width: 25px;
-                height: 25px;
-             }
+                .nav-link img {
+                    width: 25px;
+                    height: 25px;
+                }
             }
         }
-            
+
     }
 }

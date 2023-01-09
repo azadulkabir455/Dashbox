@@ -17,7 +17,7 @@ export default function Sidebar() {
                 <div className="collapsableIcon d-flex align-items-center justify-content-center" onClick={sidebarCollapseToggle}>
                     <BsTextIndentLeft />
                 </div>
-                <git SidebarDropdown 
+                <SidebarDropdown 
                 menuIcon={<BsFillGrid1X2Fill />} 
                 menuName="Dashbord"
                 menuLink='/dashbord'
