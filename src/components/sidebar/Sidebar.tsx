@@ -7,8 +7,6 @@ import { Outlet } from 'react-router-dom';
 import BreadCrumbs from '../breadCrumbs/BreadCrumbs';
 
 
-
-
 export default function Sidebar() {
     const { sidebarCollapse, sidebarCollapseToggle }: any = useContext(GlobalContextProvider);
 

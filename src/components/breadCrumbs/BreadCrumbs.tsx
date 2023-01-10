@@ -17,8 +17,6 @@ export default function BreadCrumbs() {
 
             )
         })
-
-    console.log(currentLink)
     return (
         <>
             <div className="breadCrumbsContainer">

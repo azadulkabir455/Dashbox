@@ -7,7 +7,6 @@ import { Link } from 'react-router-dom'
 
 export default function SidebarDropdown({ menuIcon, menuName, menuLink, dropdownContents }: SidebarMenuProps) {
     const { sidebarCollapse }: any = useContext(GlobalContextProvider)
-    console.log(sidebarCollapse);
     return (
         <div className="dropdown mb-2">
             {
