@@ -53,15 +53,15 @@ export default function CreateCategories() {
     if (checkError) {
       dispatch(addPostCategory(categoryData))
       setRender((value) => !value)
+
     } else {
       toast("Please provide correct inputs", { type: "error" })
     }
-    setCategoryName("");
-    setCategoryDesc("");
-    let form = document.getElementById("from")
-    form && form.reset();
+    // setCategoryName("");
+    // setCategoryDesc("");
+    // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+    // console.log((document.getElementById("form") as HTMLInputElement)) 
   }
-  console.log(categoryName, categoryDesc);
   useEffect(() => {
     dispatch(getPostCategory())
   }, [render]);
@@ -74,7 +74,7 @@ export default function CreateCategories() {
           <div className="row g-4">
             <div className="col-12 col-lg-8">
               <strong className='mb-2 d-block text-capitalize'> Post categories form</strong>
-              <form onSubmit={submitHandle} id="from">
+              <form onSubmit={submitHandle} id="form">
                 <div className="mb-4">
                   <div className="input-group">
                     <span className='input-group-text text-muted'><BsPlusCircle /></span>
@@ -113,8 +113,8 @@ export default function CreateCategories() {
                       <td>{count++}</td>
                       <td className='text-capitalize'>{postCategory.categoryName}</td>
                       <td>{postCategory.categoryDesc ? postCategory.categoryDesc : '-'}</td>
-                      <td className='text-center text-danger' onClick={() => deleteCategory(postCategory.id)} style={{fontSize:"16px"}}>
-                        <BsXCircle role="button"/>
+                      <td className='text-center text-info' onClick={() => deleteCategory(postCategory.id)} >
+                        <BsXCircle role="button" style={{ fontSize: "16px", fontWeight: "700" }}/>
                       </td>
                     </tr>
                   )

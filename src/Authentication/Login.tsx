@@ -10,8 +10,8 @@ import { toast } from 'react-toastify';
 const Login: FC = () => {
 
   const [inputs, setInputs] = useState<loginInputsType>({
-    email: '',
-    password: ''
+    email: 'azadulkabir10@gmail.com',
+    password: 'azad123'
   } as loginInputsType);
 
   const [error, setError] = useState<loginErrType>({
