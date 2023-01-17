@@ -28,8 +28,8 @@ export default function Registration() {
     } as registrationErrInputsType)
 
     // Sign Up Data
-    const {email, password, confirmPassword, ...restInputData} = inputs;
-    const userData = {...restInputData, role:"user", img:""}
+    const { email, password, confirmPassword, ...restInputData } = inputs;
+    const userData = { ...restInputData, email, role: "user", img: "" }
 
     // Auth Context
     const { signUp }: any = useContext(AuthContextProvider);
@@ -48,10 +48,10 @@ export default function Registration() {
         e.preventDefault();
         setError((errors) => ({ ...error, ...errMsg }));
         const errorCheck = Object.values(error).every((value) => value === "")
-        if(errorCheck) {
-            signUp(email, password, {...userData})
+        if (errorCheck) {
+            signUp(email, password, { ...userData })
         } else {
-            toast("Please correct your inputs!", {type: "error"})
+            toast("Please correct your inputs!", { type: "error" })
         }
     }
     return (

@@ -1,16 +1,17 @@
-import React,{useState,useEffect,useRef} from 'react'
+import React,{useState,useEffect,useRef, useContext} from 'react'
 import { BsMoonFill, BsGlobe2, BsCart3, BsFillEnvelopeFill, BsBellFill, BsListNested, BsPersonCircle, BsBoxArrowRight } from "react-icons/bs";
 import MenuItem from './menuComponent/MenuItem';
 import LanguagesDropdownMenu from './menuComponent/LanguagesDropdownMenu';
 import { Images } from '../../assets/media/Media';
 import { Link } from 'react-router-dom';
 import "../../assets/css/menuCSS/topnav.scss"
+import { AuthContextProvider   } from '../../contextApi/AuthContext';
 import MessageDropdownMenu from './menuComponent/MessageDropdownMenu';
 import ProductDropdownMenu from './menuComponent/ProductDropdownMenu';
 import NotificationDropdownMenu from './menuComponent/NotificationDropdownMenu';
 
 export default function TopNavbar() {
-
+    const {logOut}:any = useContext(AuthContextProvider)
     // Mobile Menu Show Hide Functionality 
     const menuRef = useRef<HTMLDivElement>(null!);
     const [showMenu, setShowMenu] = useState(false);
@@ -73,7 +74,7 @@ export default function TopNavbar() {
                                         </a>
                                     </li>
                                     <li>
-                                        <a className="dropdown-item p-1 fw-semibold text-capitalize d-flex align-items-center text-muted" href="/">
+                                        <a className="dropdown-item p-1 fw-semibold text-capitalize d-flex align-items-center text-muted" onClick={() => logOut()}>
                                             <BsBoxArrowRight className='me-1' />Log out
                                         </a>
                                     </li>
