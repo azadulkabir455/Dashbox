@@ -13,7 +13,7 @@ const Dashbord = lazy(() => import("../pages/Dashbord/Dashbord"))
 
 // Post Pages
 
-const AllBlog = lazy(() => import("../pages/blogPosts/AddBlog"));
+const AllBlog = lazy(() => import("../pages/blogPosts/AllBlog"));
 const CreateBlog = lazy(() => import("../pages/blogPosts/CreateBlog"));
 const CreateCategories = lazy(() => import("../pages/blogPosts/CreateCategories"));
 

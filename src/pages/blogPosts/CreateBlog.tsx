@@ -78,7 +78,7 @@ export default function CreateBlog() {
     })
   }
 
-  const combineData = {blogName, blogCategory, imgUrl, blog, comments:[],likes:[]}
+  const combineData = { blogName, blogCategory, imgUrl, blog, comments: [], likes: [] }
   const submitHandler = (e: React.SyntheticEvent) => {
     e.preventDefault();
     dispatch(addPost(combineData))
@@ -95,7 +95,7 @@ export default function CreateBlog() {
                     <BsCloudUpload className='text-primary' role="button" />
                     <h6 className=' text-capitalize mt-3 text-muted'>Upload your banner image</h6>
                   </label>
-                  <input className="form-control d-none" type="file" id="img" onChange={imgHandler} disabled={imgUrl?true:false} />
+                  <input className="form-control d-none" type="file" id="img" onChange={imgHandler} disabled={imgUrl ? true : false} />
                   {
                     (uploadProgress === null || uploadProgress >= 100) ?
                       "" :
@@ -133,47 +133,49 @@ export default function CreateBlog() {
                 </div>
               </div>
               <div className="col-12 d-grid">
-                <input type="submit" value="Add blog" className='mt-2 btn btn-lg btn-success text-capitalize fw-semibold' style={{ fontSize: '16px' }} />
+                <input type="submit" value="Add blog" className='mt-2 mb-3 btn btn-lg btn-success text-capitalize fw-semibold' style={{ fontSize: '16px' }} />
               </div>
             </div>
           </form>
         </div>
-        <div className="col-12 col-lg-6 blogPreview border p-0">
-          <h6 className="d-flex fw-bold text-capitalize bg-primary text-white px-3 py-2 m-0">
-            <BsKanbanFill className="me-1" />
-            Post preview
-          </h6>
-          <div className="previewContainer bg-white m-3 ">
-            <div className="banner position-relative">
-              <div className="imgContainer">
-                {
-                  imgUrl ?
-                    <>
-                      <div className="inputImg">
-                        <img src={imgUrl} alt="post image" />
-                        <BsXCircle className="position-absolute" onClick={deleteImg} role="button"/>
-                      </div>
-                    </>
-                    :
-                    <img src="https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png" alt="post image"/>
-                }
-              </div>
-            </div>
-            <div className="blogInfo mt-3 px-3 d-flex justify-content-between align-items-center ">
-              <div className="userInfo d-flex align-items-center">
-                <img src="https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png" alt="" className="rounded-circle border border-primary border-2" />
-                <div className="userContent ms-2">
-                  <h6 className="m-0 fw-semibold">Azad Ul Kabir</h6>
-                  <small className="text-muted">admin</small>
+        <div className="col-12 col-lg-6">
+          <div className="blogPreview border">
+            <h6 className="d-flex fw-bold text-capitalize bg-primary text-white px-3 py-2 m-0">
+              <BsKanbanFill className="me-1" />
+              Post preview
+            </h6>
+            <div className="previewContainer bg-white m-3 ">
+              <div className="banner position-relative">
+                <div className="imgContainer">
+                  {
+                    imgUrl ?
+                      <>
+                        <div className="inputImg">
+                          <img src={imgUrl} alt="post image" />
+                          <BsXCircle className="position-absolute" onClick={deleteImg} role="button" />
+                        </div>
+                      </>
+                      :
+                      <img src="https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png" alt="post image" />
+                  }
                 </div>
               </div>
-              <span className="blogCategory badge rounded-pill bg-info text-capitalize">
-                {blogCategory}
-              </span>
-            </div>
-            <div className="blog py-4 px-3">
-              <h2 className="text-capitalize fw-bold text-primary">{blogName}</h2>
-              <p className="m-0">{blog}</p>
+              <div className="blogInfo mt-3 px-3 d-flex justify-content-between align-items-center ">
+                <div className="userInfo d-flex align-items-center">
+                  <img src="https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png" alt="" className="rounded-circle border border-primary border-2" />
+                  <div className="userContent ms-2">
+                    <h6 className="m-0 fw-semibold">Azad Ul Kabir</h6>
+                    <small className="text-muted">admin</small>
+                  </div>
+                </div>
+                <span className="blogCategory badge rounded-pill bg-info text-capitalize">
+                  {blogCategory}
+                </span>
+              </div>
+              <div className="blog py-4 px-3">
+                <h2 className="text-capitalize fw-bold text-primary">{blogName}</h2>
+                <p className="m-0">{blog}</p>
+              </div>
             </div>
           </div>
         </div>
