@@ -1,5 +1,6 @@
 import React, { createContext, useState, useEffect } from 'react'
 import { getPostCategory } from '../store/actions/postCategoryAction';
+import { getUsers } from '../store/actions/userAction';
 import { useDispatch } from 'react-redux';
 import { ContextApiChildrenType } from '../assets/TsType/TypeScriptTypes';
 
@@ -21,6 +22,7 @@ const GlobalContextConsumer = ({ children }: ContextApiChildrenType) => {
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(getPostCategory());
+        dispatch(getUsers());
     }, [])
     return (
         <GlobalContextProvider.Provider value={{ sidebarCollapse, sidebarCollapseToggle, blogName, setBlogName, blogCategory, setBlogCategory, blog, setBlog, imgUrl, setImgUrl }}>

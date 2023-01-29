@@ -69,14 +69,14 @@ export default function TopNavbar() {
                                 </a>
                                 <ul className="dropdown-menu">
                                     <li>
-                                        <a className="dropdown-item p-1 fw-semibold text-capitalize d-flex align-items-center text-muted" href="/profile">
+                                        <Link className="dropdown-item p-1 fw-semibold text-capitalize d-flex align-items-center text-muted" to="/profile">
                                             <BsPersonCircle className='me-1' />My Profile
-                                        </a>
+                                        </Link>
                                     </li>
                                     <li>
-                                        <a className="dropdown-item p-1 fw-semibold text-capitalize d-flex align-items-center text-muted" onClick={() => logOut()}>
+                                        <Link className="dropdown-item p-1 fw-semibold text-capitalize d-flex align-items-center text-muted" to="" onClick={() => logOut()}>
                                             <BsBoxArrowRight className='me-1' />Log out
-                                        </a>
+                                        </Link>
                                     </li>
                                 </ul>
                             </li>

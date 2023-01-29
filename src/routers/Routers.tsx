@@ -10,6 +10,7 @@ const ForgotPass = lazy(() => import("../Authentication/ForgotPass"))
 
 // Dashboard Pages
 const Dashbord = lazy(() => import("../pages/Dashbord/Dashbord"))
+const UserProfile = lazy(() => import("../pages/UserProfile"))
 
 // Post Pages
 
@@ -30,6 +31,7 @@ export default function Routers() {
             {/* Pages */}
             <Route path="/"  element={<Home />}>
               <Route index element={<Dashbord />} />
+              <Route path="profile" element={<UserProfile/>} />
               <Route path="allblog">
                 <Route index element={<AllBlog/>}/>
                 <Route path="createblog" element={<CreateBlog/>}/>

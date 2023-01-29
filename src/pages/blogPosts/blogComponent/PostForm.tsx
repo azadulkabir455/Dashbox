@@ -28,7 +28,6 @@ export default function PostForm({ isCreatePost, postData }: postForm) {
         setBlogCategory }: any = useContext(GlobalContextProvider)
     const [id, setId] = useState<number | null>(null)
 
-    console.log(blogName, blog)
 
     // Img upload function
     const [img, setImg] = useState<null | any>(null);

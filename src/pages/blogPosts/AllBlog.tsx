@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { useSelector } from 'react-redux';
 import { BsSearch, BsFillPersonFill, BsColumnsGap, BsListUl, BsGridFill, BsGrid3X3GapFill, BsThreeDotsVertical, BsFillHeartFill, BsChatLeftTextFill, BsVectorPen, BsFillTrash2Fill, BsFillEyeFill } from "react-icons/bs";
 import EditModals from './blogComponent/EditModals';
 import "../../assets/css/blogPost.scss"
@@ -8,6 +9,9 @@ export default function AllBlog() {
   const [isList, setIsList] = useState<boolean>(false);
   const [isGrid, setGrid] = useState<boolean>(true);
   const [col, setCol] = useState<boolean>(false);
+
+  const { users } = useSelector((state: any) => state.user)
+  console.log(users)
 
   const listView = () => {
     setIsList(true);
@@ -20,7 +24,6 @@ export default function AllBlog() {
   const increseCol = () => {
     setCol((value) => !value)
   }
-  console.log("list", isList, "grid", isGrid)
 
   return (
     <>
