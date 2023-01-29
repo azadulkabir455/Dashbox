@@ -24,17 +24,17 @@ root.render(
     <Provider store={store}>
       <Router>
         <ErrorBoundary>
-          <GlobalContextConsumer>
-            <AuthContextConsumer>
+          <AuthContextConsumer>
+            <GlobalContextConsumer>
               <>
                 <App />
-                <ToastContainer 
+                <ToastContainer
                   autoClose={3000}
-                  hideProgressBar={false} 
+                  hideProgressBar={false}
                 />
               </>
-            </AuthContextConsumer>
-          </GlobalContextConsumer>
+            </GlobalContextConsumer>
+          </AuthContextConsumer>
         </ErrorBoundary>
       </Router>
     </Provider>

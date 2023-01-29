@@ -28,7 +28,7 @@ const userReducer = createSlice({
             }).catch((error) => {
                 toast(error, { type: "error" })
             })
-        }
+        },
     },
     extraReducers: {
         [getUsers.pending]: (state, acttion) => {

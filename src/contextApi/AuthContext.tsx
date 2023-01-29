@@ -23,7 +23,7 @@ const AuthContextProvider = createContext({});
 const AuthContextConsumer = ({ children }: ContextApiChildrenType) => {
     const navigate = useNavigate();
 
-    const [currentUser, setCurrentUser] = useState([]);
+    const [currentUser, setCurrentUser] = useState<any>([]);
 
     // signUp functionality
     const signUp = async (email: string, password: string, data: dataType) => {
@@ -76,6 +76,7 @@ const AuthContextConsumer = ({ children }: ContextApiChildrenType) => {
             userSubs();
         }
     })
+  
 
     return (
         <AuthContextProvider.Provider value={{ signUp, signIn, logOut, resetPassword, currentUser }}>

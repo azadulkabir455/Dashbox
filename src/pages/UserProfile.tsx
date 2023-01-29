@@ -1,23 +1,27 @@
 
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
+import { GlobalContextProvider } from '../contextApi/GlobalContext';
 import { BsCloudUpload, BsXCircle, BsKanbanFill, BsFillTelephoneFill, BsFillEnvelopeFill } from "react-icons/bs";
 
 import { v4 } from 'uuid';
 import { storage } from '../firebase-config';
-import { ref, uploadBytesResumable, getDownloadURL,deleteObject } from 'firebase/storage';
+import { ref, uploadBytesResumable, getDownloadURL, deleteObject } from 'firebase/storage';
 import "../assets/css/profile.scss"
 
 
 
 export default function UserProfile() {
-    const [profileInputs, setProfileInputs] = useState<any>({});
+
+    const [profileInputs, setProfileInputs] = useState<any>({name:"",username:"",phone:""});
     const [bio, setBio] = useState<string>("")
 
     const [img, setImg] = useState<null | any>(null);
     const [imgUrl, setImgUrl] = useState<string>("");
     const [imgUpload, setImgUpload] = useState<null | number>(null)
 
-
+    // Single User data fetch
+    const {singleUser}:any = useContext(GlobalContextProvider);
+    console.log(singleUser, profileInputs)
     const submitHandler = (e: React.SyntheticEvent) => {
         e.preventDefault();
     }
@@ -71,7 +75,11 @@ export default function UserProfile() {
             })
         }
         )
-    }, [img])
+    }, [img]);
+
+    useEffect(() => {
+        singleUser && setProfileInputs({name: singleUser.name, username: singleUser.username, phone: singleUser.phone})
+    },[singleUser])
     return (
         <>
             <div className="row">
@@ -85,6 +93,13 @@ export default function UserProfile() {
                                         <h6 className=' text-capitalize mt-3 text-muted'>Upload your picture</h6>
                                     </label>
                                     <input className="form-control d-none" type="file" id="img" onChange={imgHandler} />
+                                    {
+                                        (imgUpload === null || imgUpload >= 100) ?
+                                            "" :
+                                            <div className="progress">
+                                                <div className="progress-bar" role="progressbar" style={{ width: `${imgUpload}%` }} >{Math.ceil(imgUpload)} %</div>
+                                            </div>
+                                    }
                                 </div>
                             </div>
                             <div className="col-12">
@@ -113,7 +128,7 @@ export default function UserProfile() {
                             </div>
 
                             <div className="col-12 d-grid">
-                                <input type="submit" value="Update user" className='mt-2 mb-3 btn btn-lg btn-success text-capitalize fw-semibold' style={{ fontSize: '16px' }} />
+                                <input type="submit" value="Update profile" className='mt-2 mb-3 btn btn-lg btn-success text-capitalize fw-semibold' style={{ fontSize: '16px' }} />
                             </div>
 
                         </div>
@@ -128,6 +143,7 @@ export default function UserProfile() {
                         <div className="previewContainer bg-white m-3 ">
                             <div className="banner position-relative">
                                 <div className="imgContainer">
+                                    <div className="imgCoverColor"></div>
                                     {
                                         imgUrl ?
                                             <>
@@ -150,7 +166,7 @@ export default function UserProfile() {
                                         {
                                             bio ?
                                                 <p className='mt-2 text-capitalize'>
-                                                    something
+                                                    {bio}
                                                 </p> :
                                                 <p className='mt-2 text-capitalize'>
                                                     Write a fantastic bio of yours.
@@ -161,8 +177,8 @@ export default function UserProfile() {
                                         <p className='m-0 mb-2'>
                                             <BsFillTelephoneFill /> {profileInputs.phone}
                                         </p>
-                                        <p>
-                                            <BsFillEnvelopeFill /> azadulkabir@gmail.com
+                                        <p className='text-lowercase'>
+                                            <BsFillEnvelopeFill /> {singleUser && singleUser.email}
                                         </p>
                                     </div>
                                 </div>
