@@ -8,22 +8,30 @@ import { storage } from '../firebase-config';
 import { ref, uploadBytesResumable, getDownloadURL, deleteObject } from 'firebase/storage';
 import "../assets/css/profile.scss"
 
+import { useDispatch } from 'react-redux';
+import { editUser } from '../store/reducers/userReducers';
+
 
 
 export default function UserProfile() {
-
-    const [profileInputs, setProfileInputs] = useState<any>({name:"",username:"",phone:""});
+    // Single User data fetch
+    const { singleUser }: any = useContext(GlobalContextProvider);
+    
+    const [profileInputs, setProfileInputs] = useState<any>({ name: "", username: "", phone: "" });
     const [bio, setBio] = useState<string>("")
 
     const [img, setImg] = useState<null | any>(null);
     const [imgUrl, setImgUrl] = useState<string>("");
     const [imgUpload, setImgUpload] = useState<null | number>(null)
 
-    // Single User data fetch
-    const {singleUser}:any = useContext(GlobalContextProvider);
-    console.log(singleUser, profileInputs)
+
+    // Change User data function
+    const dispatch = useDispatch();
+    const combineData = { ...profileInputs, bio, imgUrl }
+    
     const submitHandler = (e: React.SyntheticEvent) => {
         e.preventDefault();
+        dispatch(editUser(combineData))
     }
 
     const inputHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -41,6 +49,7 @@ export default function UserProfile() {
     }
 
     const deleteImg = () => {
+        dispatch(editUser({imgUrl:"",id: singleUser.id}))
         const imgRef = ref(storage, imgUrl)
         deleteObject(imgRef).then(() => {
             setImgUrl("")
@@ -78,8 +87,10 @@ export default function UserProfile() {
     }, [img]);
 
     useEffect(() => {
-        singleUser && setProfileInputs({name: singleUser.name, username: singleUser.username, phone: singleUser.phone})
-    },[singleUser])
+        singleUser && setProfileInputs({ name: singleUser.name, username: singleUser.username, phone: singleUser.phone, id: singleUser.id });
+        singleUser && setImgUrl(singleUser.imgUrl);
+        singleUser && setBio(singleUser.bio)
+    }, [singleUser])
     return (
         <>
             <div className="row">
@@ -92,7 +103,7 @@ export default function UserProfile() {
                                         <BsCloudUpload className='text-primary' role="button" />
                                         <h6 className=' text-capitalize mt-3 text-muted'>Upload your picture</h6>
                                     </label>
-                                    <input className="form-control d-none" type="file" id="img" onChange={imgHandler} />
+                                    <input className="form-control d-none" type="file" id="img" onChange={imgHandler} disabled={imgUrl?true:false}/>
                                     {
                                         (imgUpload === null || imgUpload >= 100) ?
                                             "" :
@@ -145,7 +156,7 @@ export default function UserProfile() {
                                 <div className="imgContainer">
                                     <div className="imgCoverColor"></div>
                                     {
-                                        imgUrl ?
+                                        imgUrl?
                                             <>
                                                 <div className="inputImg">
                                                     <img src={imgUrl} alt="post image" />

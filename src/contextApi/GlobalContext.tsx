@@ -14,7 +14,7 @@ const GlobalContextConsumer = ({ children }: ContextApiChildrenType) => {
     // Single User data fetch
     const { currentUser }: any = useContext(AuthContextProvider)
     const { users } = useSelector((state: any) => state.user)
-    const singleUser = users.find((user: any) => user.id === currentUser.uid);
+    const singleUser:any = currentUser &&  users.find((user: any) => user.id === currentUser.uid);
 
 
 

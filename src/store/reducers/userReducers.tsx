@@ -16,7 +16,7 @@ const userReducer = createSlice({
         editUser: (state, action) => {
             const usertRef = doc(database, "users", action.payload.id);
             updateDoc(usertRef, action.payload).then(() => {
-                toast("Post update successfully", { type: "success" })
+                toast("User update successfully", { type: "success" })
             }).catch((error) => {
                 toast(error, { type: "error" })
             })
@@ -24,7 +24,7 @@ const userReducer = createSlice({
         deleteUser: (state, action) => {
             const userRed = doc(database, "users", action.payload.id);
             deleteDoc(userRed).then(() => {
-                toast("Post delete successfully", { type: "success" })
+                toast("User delete successfully", { type: "success" })
             }).catch((error) => {
                 toast(error, { type: "error" })
             })

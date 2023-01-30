@@ -1,17 +1,20 @@
-import React,{useState,useEffect,useRef, useContext} from 'react'
+import React, { useState, useEffect, useRef, useContext } from 'react'
 import { BsMoonFill, BsGlobe2, BsCart3, BsFillEnvelopeFill, BsBellFill, BsListNested, BsPersonCircle, BsBoxArrowRight } from "react-icons/bs";
 import MenuItem from './menuComponent/MenuItem';
 import LanguagesDropdownMenu from './menuComponent/LanguagesDropdownMenu';
 import { Images } from '../../assets/media/Media';
 import { Link } from 'react-router-dom';
 import "../../assets/css/menuCSS/topnav.scss"
-import { AuthContextProvider   } from '../../contextApi/AuthContext';
+import { AuthContextProvider } from '../../contextApi/AuthContext';
+import { GlobalContextProvider } from '../../contextApi/GlobalContext';
 import MessageDropdownMenu from './menuComponent/MessageDropdownMenu';
 import ProductDropdownMenu from './menuComponent/ProductDropdownMenu';
 import NotificationDropdownMenu from './menuComponent/NotificationDropdownMenu';
 
 export default function TopNavbar() {
-    const {logOut}:any = useContext(AuthContextProvider)
+    const { logOut }: any = useContext(AuthContextProvider)
+    const { singleUser }: any = useContext(GlobalContextProvider);
+    console.log(singleUser)
     // Mobile Menu Show Hide Functionality 
     const menuRef = useRef<HTMLDivElement>(null!);
     const [showMenu, setShowMenu] = useState(false);
@@ -21,9 +24,9 @@ export default function TopNavbar() {
 
     useEffect(() => {
         const showMenuHandler = (event: any) => {
-           if(!menuRef.current.contains(event.target)) {
-            setShowMenu(false)
-           }
+            if (!menuRef.current.contains(event.target)) {
+                setShowMenu(false)
+            }
         }
         document.addEventListener('mousedown', showMenuHandler)
     })
@@ -37,9 +40,9 @@ export default function TopNavbar() {
                     <div className='d-flex'>
                         <div className="mainMenuContainer position-relative d-flex align-items-center" ref={menuRef}>
                             <button className='btn btn-sm btn-primary d-lg-none actionButton me-2' onClick={toggleMenu}>
-                                <BsListNested style={{fontSize:"20px"}}/>
+                                <BsListNested style={{ fontSize: "20px" }} />
                             </button>
-                            <ul className={`navbar-nav ms-auto mainMenu ${showMenu?"show":""}`}>
+                            <ul className={`navbar-nav ms-auto mainMenu ${showMenu ? "show" : ""}`}>
                                 <MenuItem menuIcon={<BsMoonFill />} />
                                 <MenuItem
                                     menuIcon={<BsGlobe2 />}
@@ -61,10 +64,14 @@ export default function TopNavbar() {
                         <ul className="navbar-nav userMenu ps-2">
                             <li className="nav-item dropdown">
                                 <a className="nav-link dropdown-toggle d-flex align-items-center" href="/" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRr0YlatAy-hrNCQjzZ7fqDzNiXt7HGmzVaA&usqp=CAU" alt="" />
+                                    {
+                                        singleUser.imgUrl ?
+                                            <img src={singleUser.imgUrl} alt="profileImge" /> :
+                                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRr0YlatAy-hrNCQjzZ7fqDzNiXt7HGmzVaA&usqp=CAU" alt="" />
+                                    }
                                     <span className="userInfo ms-2 d-none d-lg-block">
-                                        <p className='text-secondary fw-semibold text-capitalize m-0'>Azad ul kabir</p>
-                                        <small className='text-primary'>@azad455</small>
+                                        <p className='text-secondary fw-semibold text-capitalize m-0'>{singleUser.name}</p>
+                                        <small className='text-primary'>@{singleUser.username}</small>
                                     </span>
                                 </a>
                                 <ul className="dropdown-menu">

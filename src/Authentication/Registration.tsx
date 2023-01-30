@@ -29,7 +29,7 @@ export default function Registration() {
 
     // Sign Up Data
     const { email, password, confirmPassword, ...restInputData } = inputs;
-    const userData = { ...restInputData, email, role: "user", img: "" }
+    const userData = { ...restInputData, email, role: "user", imgUrl: "" }
 
     // Auth Context
     const { signUp }: any = useContext(AuthContextProvider);
