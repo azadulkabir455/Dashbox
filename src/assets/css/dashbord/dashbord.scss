@@ -4,34 +4,63 @@
     .countContainer {
         min-height: 160px;
         overflow: hidden;
+
         .countBgIcon {
             svg {
-            position: absolute;
-            left: 60px;
-            top: 0px;
-            font-size: 180px;
-            opacity: .05;
-        }}
+                position: absolute;
+                left: 60px;
+                top: 0px;
+                font-size: 180px;
+                opacity: .05;
+            }
+        }
+
         .countIcon {
             svg {
-            width: 40px;
-            height: 40px;
-            padding: 10px;
-            border-radius: 100px;
-            background-color: rgba(0, 0, 0, 0.15);
-        }}
+                width: 40px;
+                height: 40px;
+                padding: 10px;
+                border-radius: 100px;
+                background-color: rgba(0, 0, 0, 0.15);
+            }
+        }
+
         .countTotal {
             bottom: 5px;
         }
     }
-    .last > .countContainer {
+
+    .last>.countContainer {
         min-height: 100% !important;
         height: 160px;
+
         .countBgIcon {
             svg {
-            top: 40px;
-            font-size: 280px;
-        }}
+                top: 40px;
+                font-size: 280px;
+            }
+        }
     }
 }
 
+.users {
+    table {
+        tbody {
+            td {
+                vertical-align: middle;
+            }
+            td.profilePic {
+                img {
+                    width: 35px;
+                    height: 35px;
+                    border-radius: 100px;
+                }
+            }
+            td.dropdown {
+                .form-select {
+                    font-size: 14px !important;
+                }
+            }
+        }
+    }
+}

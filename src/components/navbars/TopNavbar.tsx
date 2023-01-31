@@ -65,13 +65,13 @@ export default function TopNavbar() {
                             <li className="nav-item dropdown">
                                 <a className="nav-link dropdown-toggle d-flex align-items-center" href="/" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     {
-                                        singleUser.imgUrl ?
+                                        singleUser && singleUser.imgUrl ?
                                             <img src={singleUser.imgUrl} alt="profileImge" /> :
                                             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRr0YlatAy-hrNCQjzZ7fqDzNiXt7HGmzVaA&usqp=CAU" alt="" />
                                     }
                                     <span className="userInfo ms-2 d-none d-lg-block">
-                                        <p className='text-secondary fw-semibold text-capitalize m-0'>{singleUser.name}</p>
-                                        <small className='text-primary'>@{singleUser.username}</small>
+                                        <p className='text-secondary fw-semibold text-capitalize m-0'>{singleUser && singleUser.name}</p>
+                                        <small className='text-primary'>@{singleUser && singleUser.username}</small>
                                     </span>
                                 </a>
                                 <ul className="dropdown-menu">
