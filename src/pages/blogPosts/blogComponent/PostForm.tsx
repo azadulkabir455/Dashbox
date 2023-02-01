@@ -12,7 +12,7 @@ import "../../../assets/css/blogPost.scss"
 
 interface postForm {
     isCreatePost: boolean;
-    postData?: object;
+    postData?: any;
 }
 
 export default function PostForm({ isCreatePost, postData }: postForm) {
@@ -25,10 +25,11 @@ export default function PostForm({ isCreatePost, postData }: postForm) {
         setBlog,
         setImgUrl,
         setBlogName,
-        setBlogCategory }: any = useContext(GlobalContextProvider)
+        setBlogCategory,
+        singleUser }: any = useContext(GlobalContextProvider)
     const [id, setId] = useState<number | null>(null)
 
-
+    console.log(postData.blogCategory, blogCategory)
     // Img upload function
     const [img, setImg] = useState<null | any>(null);
     const [uploadProgress, setUploadProgress] = useState<number | null>(null);
@@ -49,12 +50,9 @@ export default function PostForm({ isCreatePost, postData }: postForm) {
         setBlog(e.target.value);
     }
 
-    // Function for Prefill and edit post
-    const prefillPost = () => {
-
-    }
-
-    // Img data collection
+    // setBlog(postData.blog);
+    // setBlogName(postData.blogName);
+    // setBlogCategory(postData.blogCategory)
 
     const imgHandler = (e: any) => {
         setImg(e.target.files[0])
@@ -88,7 +86,7 @@ export default function PostForm({ isCreatePost, postData }: postForm) {
         )
     }, [img])
 
-    const combineData = { blogName, blogCategory, imgUrl, blog, comments: [], likes: [], id: id }
+    const combineData = singleUser && { blogName, blogCategory, imgUrl, blog, comments: [], likes: [], id: id, user: singleUser }
     const submitHandler = (e: React.SyntheticEvent) => {
         e.preventDefault();
         if (isCreatePost === true) {
@@ -127,8 +125,8 @@ export default function PostForm({ isCreatePost, postData }: postForm) {
                     <div className="col-12">
                         <div className="form-group">
                             <label htmlFor="category" className="form-label text-uppercase fw-bold text-muted">Blog category</label>
-                            <select className="form-select" name="category" id="category" onChange={blogCategoryHandler}>
-                                <option value={postCategories} className="text-capitalize text-muted">Select Blog Category</option>
+                            <select className="form-select" name="category" value={blogCategory} id="category" onChange={blogCategoryHandler}>
+                                <option className="text-capitalize text-muted">Select Blog Category</option>
                                 {
                                     postCategories.map((category: any) =>
                                         <option value={category.categoryName} className="text-capitalize text-muted" key={category.id}>
@@ -150,7 +148,7 @@ export default function PostForm({ isCreatePost, postData }: postForm) {
                             <div className="col-12 d-grid">
                                 <input type="submit" value="Add blog" className='mt-2 mb-3 btn btn-lg btn-success text-capitalize fw-semibold' style={{ fontSize: '16px' }} />
                             </div>
-                            :""
+                            : ""
                     }
 
                 </div>

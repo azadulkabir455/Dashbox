@@ -9,7 +9,8 @@ import "../../assets/css/blogPost.scss"
 import PostForm from "./blogComponent/PostForm";
 
 export default function CreateBlog() {
-  const { blogName, blogCategory, blog, imgUrl, setImgUrl }: any = useContext(GlobalContextProvider)
+  const { blogName, blogCategory, blog, imgUrl, setImgUrl }: any = useContext(GlobalContextProvider);
+
   const deleteImg = () => {
     const imgRef = ref(storage, imgUrl)
     deleteObject(imgRef).then(() => {

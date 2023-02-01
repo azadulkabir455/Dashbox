@@ -17,7 +17,7 @@ export default function CreateCategories() {
   const [render, setRender] = useState(false);
 
   const dispatch = useDispatch();
-  const { postCategories, loading } = useSelector((state: any) => state.postcategory)
+  const { postCategories } = useSelector((state: any) => state.postcategory)
 
   const categoryNameHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setCategoryName(e.target.value.toLowerCase());

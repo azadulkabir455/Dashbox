@@ -14,7 +14,7 @@ import NotificationDropdownMenu from './menuComponent/NotificationDropdownMenu';
 export default function TopNavbar() {
     const { logOut }: any = useContext(AuthContextProvider)
     const { singleUser }: any = useContext(GlobalContextProvider);
-    console.log(singleUser)
+
     // Mobile Menu Show Hide Functionality 
     const menuRef = useRef<HTMLDivElement>(null!);
     const [showMenu, setShowMenu] = useState(false);

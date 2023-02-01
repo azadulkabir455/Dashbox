@@ -1,7 +1,8 @@
 import React from 'react'
 import PostForm from './PostForm'
 
-export default function ditModals({id}:any) {
+
+export default function EditModals({id, modalData}:any) {
     return (
         <>
             <div className="modal fade" id={id} tabIndex={1} >
@@ -12,7 +13,7 @@ export default function ditModals({id}:any) {
                             <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div className="modal-body">
-                            <PostForm isCreatePost={false}/>
+                            <PostForm isCreatePost={false} postData={modalData}/>
                         </div>
                         <div className="modal-footer">
                             <button type="button" className="btn btn-primary" data-bs-dismiss="modal">Save Changes</button>

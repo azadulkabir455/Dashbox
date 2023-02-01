@@ -1,12 +1,15 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { database } from "../../firebase-config";
 import { collection, addDoc, doc, updateDoc, deleteDoc } from "firebase/firestore";
+import { getPosts } from "../actions/postAction";
 import { toast } from "react-toastify";
 
 const postReducer = createSlice({
     name: "post",
     initialState: {
-        posts: []
+        posts: [],
+        loading: false,
+        error: {},
     },
     reducers: {
         addPost: (state, action) => {
@@ -20,21 +23,35 @@ const postReducer = createSlice({
         editPost: (state, action) => {
             const postRef = doc(database, "blogs", action.payload.id);
             updateDoc(postRef, action.payload).then(() => {
-                toast("Post update successfully", {type:"success"})
+                toast("Post update successfully", { type: "success" })
             }).catch((error) => {
-                toast(error,{type:"error"})
+                toast(error, { type: "error" })
             })
         },
         deletePost: (state, action) => {
-            const postRef = doc(database,"blogs", action.payload.id);
-            deleteDoc(postRef).then(() => {
-                toast("Post delete successfully", {type:"success"})
-            }).catch((error) => {
-                toast(error, {type:"error"})
-            })
+            if (window.confirm("Are you sure delete this tag?")) {
+                const postRef = doc(database, "blogs", action.payload);
+                deleteDoc(postRef).then(() => {
+                    toast("Post delete successfully", { type: "success" })
+                }).catch((error) => {
+                    toast(error, { type: "error" })
+                })
+            }
         }
     },
-    extraReducers: {}
+    extraReducers: {
+        [getPosts.pending]: (state, action) => {
+            state.loading = true;
+        },
+        [getPosts.fulfilled]: (state, action) => {
+            state.loading = false;
+            state.posts = action.payload;
+        },
+        [getPosts.error]: (state, action) => {
+            state.error = action.payload;
+            state.loading = false;
+        }
+    }
 })
 
 export const { addPost, editPost, deletePost } = postReducer.actions;

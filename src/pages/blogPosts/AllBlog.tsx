@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import { useSelector } from 'react-redux';
 import { BsSearch, BsFillPersonFill, BsColumnsGap, BsListUl, BsGridFill, BsGrid3X3GapFill, BsThreeDotsVertical, BsFillHeartFill, BsChatLeftTextFill, BsVectorPen, BsFillTrash2Fill, BsFillEyeFill } from "react-icons/bs";
 import EditModals from './blogComponent/EditModals';
+import { useDispatch } from 'react-redux';
+import { deletePost } from '../../store/reducers/postReducer';
 import "../../assets/css/blogPost.scss"
 
 
@@ -9,9 +11,11 @@ export default function AllBlog() {
   const [isList, setIsList] = useState<boolean>(false);
   const [isGrid, setGrid] = useState<boolean>(true);
   const [col, setCol] = useState<boolean>(false);
+  const [modalData, setModalData] = useState<object>({})
 
-  const { users } = useSelector((state: any) => state.user)
-  console.log(users)
+  const { posts } = useSelector((state: any) => state.post)
+  const dispatch = useDispatch();
+
 
   const listView = () => {
     setIsList(true);
@@ -25,6 +29,17 @@ export default function AllBlog() {
     setCol((value) => !value)
   }
 
+  const blogSummery = (post: string) => {
+    return post.slice(0, 120) + "..."
+  }
+
+  const deletePostFunc = (id : any) => {
+    dispatch(deletePost(id))
+  }
+
+  const setDataForModal = (data:any) => {
+    setModalData(data)
+  }
   return (
     <>
       <div className="filterArea d-flex justify-content-between align-items-center mt-2">
@@ -56,56 +71,58 @@ export default function AllBlog() {
         <div className="row">
           {
             isGrid &&
-            <div className={`col-12 col-md-6 col-lg-${col?"3":"4"}`}>
-              <div className="card">
-                <div className="card-header">
-                  <img src="https://images.pexels.com/photos/219692/pexels-photo-219692.jpeg?auto=compress&cs=tinysrgb&w=600" alt="" />
-                </div>
-                <div className="card-body">
-                  <div className="authorContent d-flex justify-content-between">
-                    <div className="author d-flex align-items-center">
-                      <div className="authorImg">
-                        <img src="https://images.pexels.com/photos/219692/pexels-photo-219692.jpeg?auto=compress&cs=tinysrgb&w=600" alt="" className='d-inline-block' />
+            posts.map((post: any) =>
+              <div className={`col-12 col-md-6 col-lg-${col ? "3" : "4"}`}>
+                <div className="card">
+                  <div className="card-header">
+                    <img src={post.imgUrl} alt="" />
+                  </div>
+                  <div className="card-body">
+                    <div className="authorContent d-flex justify-content-between">
+                      <div className="author d-flex align-items-center">
+                        <div className="authorImg">
+                          <img src="https://images.pexels.com/photos/219692/pexels-photo-219692.jpeg?auto=compress&cs=tinysrgb&w=600" alt="" className='d-inline-block' />
+                        </div>
+                        <div className="authorContent ms-2">
+                          <p className="m-0 text-capitalize">Azad ul kabir <small className='text-primary fw-semibold'>(admin)</small> </p>
+                          <small className='text-muted'>01-01-2023</small>
+                        </div>
                       </div>
-                      <div className="authorContent ms-2">
-                        <p className="m-0 text-capitalize">Azad ul kabir <small className='text-primary fw-semibold'>(admin)</small> </p>
-                        <small className='text-muted'>01-01-2023</small>
+                      <div className="category">
+                        <span className="blogCategory badge rounded-pill bg-info text-capitalize">
+                          {post.blogCategory}
+                        </span>
                       </div>
                     </div>
-                    <div className="category">
-                      <span className="blogCategory badge rounded-pill bg-info text-capitalize">
-                        Education
-                      </span>
+                    <div className="postContent mt-4">
+                      <h4 className='fw-bold text-primary text-capitalize'>{post.blogName}</h4>
+                      <p className='m-0 text-muted'>{blogSummery(post.blog)}</p>
                     </div>
                   </div>
-                  <div className="postContent mt-4">
-                    <h4 className='fw-bold text-primary text-capitalize'>The title</h4>
-                    <p className='m-0 text-muted'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis, cum.</p>
-                  </div>
-                </div>
-                <div className="card-footer d-flex justify-content-between">
-                  <div className="activity d-flex">
-                    <p className='me-3 text-muted m-0'><BsFillHeartFill /> 20</p>
-                    <p className='text-muted m-0'><BsChatLeftTextFill /> 3</p>
-                  </div>
-                  <div className="actions">
-                    <div className="dropdown">
-                      <span className="dropdown-toggle text-muted" role="button" data-bs-toggle="dropdown">
-                        <BsThreeDotsVertical />
-                      </span>
-                      <ul className="dropdown-menu p-0">
-                        <li className='px-3 py-1 text-muted' role="button" data-bs-toggle="modal" data-bs-target="#postEdit">
-                          <BsVectorPen /> Edit
-                        </li>
-                        <li className='px-3 py-1 text-muted' role="button">
-                          <BsFillTrash2Fill /> Delete
-                        </li>
-                      </ul>
+                  <div className="card-footer d-flex justify-content-between">
+                    <div className="activity d-flex">
+                      <p className='me-3 text-muted m-0'><BsFillHeartFill /> 20</p>
+                      <p className='text-muted m-0'><BsChatLeftTextFill /> 3</p>
+                    </div>
+                    <div className="actions">
+                      <div className="dropdown">
+                        <span className="dropdown-toggle text-muted" role="button" data-bs-toggle="dropdown">
+                          <BsThreeDotsVertical />
+                        </span>
+                        <ul className="dropdown-menu p-0">
+                          <li className='px-3 py-1 text-muted' role="button" data-bs-toggle="modal" data-bs-target="#postEdit" onClick={()=>setDataForModal(post)}>
+                            <BsVectorPen /> Edit
+                          </li>
+                          <li className='px-3 py-1 text-muted' role="button" onClick={() => deletePostFunc(post.id)}>
+                            <BsFillTrash2Fill /> Delete
+                          </li>
+                        </ul>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
+            )
           }
           {
             isList &&
@@ -142,7 +159,7 @@ export default function AllBlog() {
         </div>
       </div>
 
-      <EditModals id={"postEdit"} />
+      <EditModals id={"postEdit"} modalData={modalData} />
     </>
   )
 }

@@ -1,5 +1,6 @@
 import React, { createContext, useState, useEffect, useContext } from 'react'
 import { getPostCategory } from '../store/actions/postCategoryAction';
+import { getPosts } from '../store/actions/postAction';
 import { getUsers } from '../store/actions/userAction';
 import { useDispatch, useSelector } from 'react-redux';
 import { ContextApiChildrenType } from '../assets/TsType/TypeScriptTypes';
@@ -31,6 +32,7 @@ const GlobalContextConsumer = ({ children }: ContextApiChildrenType) => {
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(getPostCategory());
+        dispatch(getPosts());
         dispatch(getUsers());
     }, [])
     return (
