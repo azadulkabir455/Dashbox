@@ -1,12 +1,13 @@
 import React, { ChangeEvent, useEffect, useState, useContext } from "react"
-import { BsCloudUpload } from "react-icons/bs";
+import { BsCloudUpload, BsXCircle } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
 import { GlobalContextProvider } from "../../../contextApi/GlobalContext";
 import { addPost, editPost } from "../../../store/reducers/postReducer";
+import { serverTimestamp } from "firebase/firestore";
 
 import { v4 } from "uuid";
 import { storage } from "../../../firebase-config";
-import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+import { ref, uploadBytesResumable, getDownloadURL, deleteObject } from "firebase/storage";
 
 import "../../../assets/css/blogPost.scss"
 
@@ -29,7 +30,6 @@ export default function PostForm({ isCreatePost, postData }: postForm) {
         singleUser }: any = useContext(GlobalContextProvider)
     const [id, setId] = useState<number | null>(null)
 
-    console.log(postData.blogCategory, blogCategory)
     // Img upload function
     const [img, setImg] = useState<null | any>(null);
     const [uploadProgress, setUploadProgress] = useState<number | null>(null);
@@ -49,10 +49,21 @@ export default function PostForm({ isCreatePost, postData }: postForm) {
     const blogHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
         setBlog(e.target.value);
     }
+    const deleteImg = () => {
+        const imgRef = ref(storage, imgUrl)
+        deleteObject(imgRef).then(() => {
+            setImgUrl("")
+            console.log("Image delete successfully")
+        })
+    }
+    useEffect(() => {
+        postData && setBlog(postData.blog);
+        postData && setBlogName(postData.blogName);
+        postData && setBlogCategory(postData.blogCategory);
+        postData && setImgUrl(postData.imgUrl)
+        postData && setId(postData.id)
+    }, [postData])
 
-    // setBlog(postData.blog);
-    // setBlogName(postData.blogName);
-    // setBlogCategory(postData.blogCategory)
 
     const imgHandler = (e: any) => {
         setImg(e.target.files[0])
@@ -86,13 +97,14 @@ export default function PostForm({ isCreatePost, postData }: postForm) {
         )
     }, [img])
 
-    const combineData = singleUser && { blogName, blogCategory, imgUrl, blog, comments: [], likes: [], id: id, user: singleUser }
+    const combineData = singleUser && { blogName, blogCategory, imgUrl, blog, comments: [], likes: [], user: singleUser, date: serverTimestamp() }
     const submitHandler = (e: React.SyntheticEvent) => {
         e.preventDefault();
         if (isCreatePost === true) {
             dispatch(addPost(combineData));
         } else {
-            dispatch(editPost(combineData))
+            // console.log({ ...combineData, id: id })
+            dispatch(editPost({ ...combineData, id: id }))
         }
 
     }
@@ -101,20 +113,42 @@ export default function PostForm({ isCreatePost, postData }: postForm) {
             <form onSubmit={submitHandler}>
                 <div className="row g-3">
                     <div className="col-12">
-                        <div className="form-group inputImg position-relative text-center">
-                            <label htmlFor="img" className="form-label d-block border pt-5 pb-4">
-                                <BsCloudUpload className='text-primary' role="button" />
-                                <h6 className=' text-capitalize mt-3 text-muted'>Upload your banner image</h6>
-                            </label>
-                            <input className="form-control d-none" type="file" id="img" onChange={imgHandler} disabled={imgUrl ? true : false} />
-                            {
-                                (uploadProgress === null || uploadProgress >= 100) ?
-                                    "" :
-                                    <div className="progress">
-                                        <div className="progress-bar" role="progressbar" style={{ width: `${uploadProgress}%` }} >{Math.ceil(uploadProgress)} %</div>
-                                    </div>
-                            }
-                        </div>
+                        {
+                            isCreatePost ?
+                                <div className="form-group inputImg position-relative text-center">
+                                    <label htmlFor="img" className="form-label d-block border pt-5 pb-4">
+                                        <BsCloudUpload className='text-primary' role="button" />
+                                        <h6 className=' text-capitalize mt-3 text-muted'>Upload your banner image</h6>
+                                    </label>
+                                    <input className="form-control d-none" type="file" id="img" onChange={imgHandler} disabled={imgUrl ? true : false} />
+                                    {
+                                        (uploadProgress === null || uploadProgress >= 100) ?
+                                            "" :
+                                            <div className="progress">
+                                                <div className="progress-bar" role="progressbar" style={{ width: `${uploadProgress}%` }} >{Math.ceil(uploadProgress)} %</div>
+                                            </div>
+                                    }
+                                </div> :
+                                <div className="form-group inputImg position-relative text-center">
+                                    {imgUrl ?
+                                        <div className="inputImg position-relative">
+                                            <img src={imgUrl} alt="post image" style={{ width: "100%", height: "130px", objectFit: "cover" }} />
+                                            <BsXCircle className="position-absolute top-0 start-0" onClick={deleteImg} role="button" />
+                                        </div>
+                                        : <label htmlFor="img" className="form-label d-block border pt-5 pb-4">
+                                            <BsCloudUpload className='text-primary' role="button" />
+                                            <h6 className=' text-capitalize mt-3 text-muted'>Upload your banner image</h6>
+                                        </label>}
+                                    <input className="form-control d-none" type="file" id="img" onChange={imgHandler} disabled={imgUrl ? true : false} />
+                                    {
+                                        (uploadProgress === null || uploadProgress >= 100) ?
+                                            "" :
+                                            <div className="progress">
+                                                <div className="progress-bar" role="progressbar" style={{ width: `${uploadProgress}%` }} >{Math.ceil(uploadProgress)} %</div>
+                                            </div>
+                                    }
+                                </div>
+                        }
                     </div>
                     <div className="col-12">
                         <div className="form-group">
@@ -143,13 +177,10 @@ export default function PostForm({ isCreatePost, postData }: postForm) {
                             <textarea className="form-control" id="blog" rows={5} value={blog} placeholder="Write your blog here" onChange={blogHandler} />
                         </div>
                     </div>
-                    {
-                        isCreatePost ?
-                            <div className="col-12 d-grid">
-                                <input type="submit" value="Add blog" className='mt-2 mb-3 btn btn-lg btn-success text-capitalize fw-semibold' style={{ fontSize: '16px' }} />
-                            </div>
-                            : ""
-                    }
+
+                    <div className="col-12 d-grid">
+                        <input type="submit" value={isCreatePost?"Add blog":"Save changes"} className='mt-2 mb-3 btn btn-lg btn-success text-capitalize fw-semibold' style={{ fontSize: '16px' }} />
+                    </div>
 
                 </div>
             </form>

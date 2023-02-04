@@ -25,6 +25,17 @@ const GlobalContextConsumer = ({ children }: ContextApiChildrenType) => {
     const [blog, setBlog] = useState<string>("Write your blog here")
     const [imgUrl, setImgUrl] = useState<string>("");
 
+    // Function for getting date
+    const getDate = (date: any) => {
+        const year = date.getFullYear();
+        const month = date.getMonth();
+        const day = date.getDate();
+        const houre = date.getHours();
+        const min = date.getMinutes();
+        const combineDate = year + "-" + month + "-" + day + " " + houre + ":" + min;
+        return combineDate + (houre <= 12 ? "am" : "pm");
+      }
+
     const sidebarCollapseToggle = () => {
         setSidebarCollapse((value) => !value);
     }
@@ -36,7 +47,7 @@ const GlobalContextConsumer = ({ children }: ContextApiChildrenType) => {
         dispatch(getUsers());
     }, [])
     return (
-        <GlobalContextProvider.Provider value={{ sidebarCollapse, sidebarCollapseToggle, blogName, setBlogName, blogCategory, setBlogCategory, blog, setBlog, imgUrl, setImgUrl,singleUser }}>
+        <GlobalContextProvider.Provider value={{ sidebarCollapse, sidebarCollapseToggle, blogName, setBlogName, blogCategory, setBlogCategory, blog, setBlog, imgUrl, setImgUrl,singleUser,getDate }}>
             {children}
         </GlobalContextProvider.Provider>
     )

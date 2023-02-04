@@ -15,9 +15,6 @@ export default function EditModals({id, modalData}:any) {
                         <div className="modal-body">
                             <PostForm isCreatePost={false} postData={modalData}/>
                         </div>
-                        <div className="modal-footer">
-                            <button type="button" className="btn btn-primary" data-bs-dismiss="modal">Save Changes</button>
-                        </div>
                     </div>
                 </div>
             </div>

@@ -1,9 +1,10 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { useSelector } from 'react-redux';
 import { BsSearch, BsFillPersonFill, BsColumnsGap, BsListUl, BsGridFill, BsGrid3X3GapFill, BsThreeDotsVertical, BsFillHeartFill, BsChatLeftTextFill, BsVectorPen, BsFillTrash2Fill, BsFillEyeFill } from "react-icons/bs";
 import EditModals from './blogComponent/EditModals';
 import { useDispatch } from 'react-redux';
 import { deletePost } from '../../store/reducers/postReducer';
+import { GlobalContextProvider } from '../../contextApi/GlobalContext';
 import "../../assets/css/blogPost.scss"
 
 
@@ -16,6 +17,7 @@ export default function AllBlog() {
   const { posts } = useSelector((state: any) => state.post)
   const dispatch = useDispatch();
 
+  const {getDate}:any = useContext(GlobalContextProvider)
 
   const listView = () => {
     setIsList(true);
@@ -72,7 +74,7 @@ export default function AllBlog() {
           {
             isGrid &&
             posts.map((post: any) =>
-              <div className={`col-12 col-md-6 col-lg-${col ? "3" : "4"}`}>
+              <div className={`col-12 col-md-6 col-lg-${col ? "3" : "4"}`} key={post.id}>
                 <div className="card">
                   <div className="card-header">
                     <img src={post.imgUrl} alt="" />
@@ -81,11 +83,16 @@ export default function AllBlog() {
                     <div className="authorContent d-flex justify-content-between">
                       <div className="author d-flex align-items-center">
                         <div className="authorImg">
-                          <img src="https://images.pexels.com/photos/219692/pexels-photo-219692.jpeg?auto=compress&cs=tinysrgb&w=600" alt="" className='d-inline-block' />
+                          {
+                            post.user?.imgUrl?
+                            <img src={post.user.imgUrl} alt="" className='d-inline-block'/> : 
+                            <img src="https://images.pexels.com/photos/219692/pexels-photo-219692.jpeg?auto=compress&cs=tinysrgb&w=600" alt="" className='d-inline-block' />
+                          }
+                         
                         </div>
                         <div className="authorContent ms-2">
-                          <p className="m-0 text-capitalize">Azad ul kabir <small className='text-primary fw-semibold'>(admin)</small> </p>
-                          <small className='text-muted'>01-01-2023</small>
+                          <p className="m-0 text-capitalize">{post.user?.name}<small className='text-primary fw-semibold'>({post.user?.role})</small> </p>
+                          <small className='text-muted'>{post.date && getDate(new Date(post.date.seconds * 1000))}</small>
                         </div>
                       </div>
                       <div className="category">
