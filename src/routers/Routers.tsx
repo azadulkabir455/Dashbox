@@ -21,6 +21,10 @@ const AllBlog = lazy(() => import("../pages/blogPosts/AllBlog"));
 const CreateBlog = lazy(() => import("../pages/blogPosts/CreateBlog"));
 const CreateCategories = lazy(() => import("../pages/blogPosts/CreateCategories"));
 
+// Single Pages
+
+const SinglePostPage = lazy(() => import("../pages/blogPosts/SingleBlog"));
+
 // Pages
 const Home = lazy(() => import("../pages/Home"))
 export default function Routers() {
@@ -41,10 +45,11 @@ export default function Routers() {
               <Route index element={<ProtectedRoute {...defaultProtectedRouteProps} outlet={<Dashbord />}/>} />
               <Route path="profile" element={<ProtectedRoute {...defaultProtectedRouteProps} outlet={<UserProfile/>}/>} />
               <Route path="allblog">
-                <Route index element={<ProtectedRoute {...defaultProtectedRouteProps} outlet={<AllBlog/>}/>}/>
+                <Route index element={<ProtectedRoute {...defaultProtectedRouteProps} outlet={<AllBlog/>}/>} />
                 <Route path="createblog" element={<ProtectedRoute {...defaultProtectedRouteProps} outlet={<CreateBlog/>}/>}/>
                 <Route path="createcetagories" element={<ProtectedRoute {...defaultProtectedRouteProps} outlet={<CreateCategories/>}/>}/>
               </Route>
+              <Route  path="allblog/:id" element={<ProtectedRoute {...defaultProtectedRouteProps} outlet={<SinglePostPage/>}/>}/>
             </Route>
         </Routes>
     </Suspense>

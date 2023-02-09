@@ -1,4 +1,5 @@
 import React, { useState, useContext } from 'react'
+import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { BsSearch, BsFillPersonFill, BsColumnsGap, BsListUl, BsGridFill, BsGrid3X3GapFill, BsThreeDotsVertical, BsFillHeartFill, BsChatLeftTextFill, BsVectorPen, BsFillTrash2Fill, BsFillEyeFill } from "react-icons/bs";
 import EditModals from './blogComponent/EditModals';
@@ -77,7 +78,7 @@ export default function AllBlog() {
               <div className={`col-12 col-md-6 col-lg-${col ? "3" : "4"}`} key={post.id}>
                 <div className="card">
                   <div className="card-header">
-                    <img src={post.imgUrl} alt="" />
+                    <Link to={post.id}><img src={post.imgUrl} alt="" /></Link>
                   </div>
                   <div className="card-body">
                     <div className="authorContent d-flex justify-content-between">
