@@ -27,7 +27,8 @@ export default function PostForm({ isCreatePost, postData }: postForm) {
         setImgUrl,
         setBlogName,
         setBlogCategory,
-        singleUser }: any = useContext(GlobalContextProvider)
+        singleUser,
+        postDataUpdate }: any = useContext(GlobalContextProvider)
     const [id, setId] = useState<number | null>(null)
 
     // Img upload function
@@ -98,15 +99,28 @@ export default function PostForm({ isCreatePost, postData }: postForm) {
     }, [img])
 
     const combineData = singleUser && { blogName, blogCategory, imgUrl, blog, comments: [], likes: [], user: singleUser, date: serverTimestamp() }
+
     const submitHandler = (e: React.SyntheticEvent) => {
         e.preventDefault();
         if (isCreatePost === true) {
             dispatch(addPost(combineData));
+            postDataUpdate();
         } else {
             // console.log({ ...combineData, id: id })
-            dispatch(editPost({ ...combineData, id: id }))
+            dispatch(editPost({ ...combineData, id: id }));
+            postDataUpdate();
         }
 
+    }
+
+    const closeIconStyle = {
+        top: "5px",
+        left: "5px",
+        fontSize: "25px",
+        padding: "5px",
+        borderRadius: "1000px",
+        backgroundColor: "rgb(0 140 186 / 38%)",
+        color: "#fff",
     }
     return (
         <>
@@ -133,7 +147,7 @@ export default function PostForm({ isCreatePost, postData }: postForm) {
                                     {imgUrl ?
                                         <div className="inputImg position-relative">
                                             <img src={imgUrl} alt="post image" style={{ width: "100%", height: "130px", objectFit: "cover" }} />
-                                            <BsXCircle className="position-absolute top-0 start-0" onClick={deleteImg} role="button" />
+                                            <BsXCircle className="position-absolute" onClick={deleteImg} role="button" style={closeIconStyle} />
                                         </div>
                                         : <label htmlFor="img" className="form-label d-block border pt-5 pb-4">
                                             <BsCloudUpload className='text-primary' role="button" />
@@ -179,9 +193,8 @@ export default function PostForm({ isCreatePost, postData }: postForm) {
                     </div>
 
                     <div className="col-12 d-grid">
-                        <input type="submit" value={isCreatePost?"Add blog":"Save changes"} className='mt-2 mb-3 btn btn-lg btn-success text-capitalize fw-semibold' style={{ fontSize: '16px' }} />
+                        <input type="submit" value={isCreatePost ? "Add blog" : "Save changes"} className='mt-2 mb-3 btn btn-lg btn-success text-capitalize fw-semibold' style={{ fontSize: '16px' }} data-bs-dismiss="modal" />
                     </div>
-
                 </div>
             </form>
         </>

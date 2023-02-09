@@ -21,7 +21,6 @@ const postReducer = createSlice({
             })
         },
         editPost: (state, action) => {
-            console.log(action.payload, action.payload.id, "Hay")
             const postRef = doc(database, "blogs", action.payload.id);
             updateDoc(postRef, action.payload).then(() => {
                 toast("Post update successfully", { type: "success" })

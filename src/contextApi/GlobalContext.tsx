@@ -11,6 +11,7 @@ const GlobalContextProvider = createContext({});
 
 const GlobalContextConsumer = ({ children }: ContextApiChildrenType) => {
     const [sidebarCollapse, setSidebarCollapse] = useState<boolean>(true)
+    const [postUpdate, setPostUpdate] = useState<boolean>(true)
 
     // Single User data fetch
     const { currentUser }: any = useContext(AuthContextProvider)
@@ -35,19 +36,28 @@ const GlobalContextConsumer = ({ children }: ContextApiChildrenType) => {
         const combineDate = year + "-" + month + "-" + day + " " + houre + ":" + min;
         return combineDate + (houre <= 12 ? "am" : "pm");
       }
-
+    
+    // For value change function
     const sidebarCollapseToggle = () => {
         setSidebarCollapse((value) => !value);
     }
 
+    const postDataUpdate = () => {
+        setPostUpdate((value) =>  !value)
+    }
+    // All Data fetch function
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(getPostCategory());
         dispatch(getPosts());
         dispatch(getUsers());
-    }, [])
+    },[]);
+    useEffect(() => {
+        dispatch(getPosts());
+    },[postUpdate])
+    console.log("Posts",postUpdate,sidebarCollapse)
     return (
-        <GlobalContextProvider.Provider value={{ sidebarCollapse, sidebarCollapseToggle, blogName, setBlogName, blogCategory, setBlogCategory, blog, setBlog, imgUrl, setImgUrl,singleUser,getDate }}>
+        <GlobalContextProvider.Provider value={{ sidebarCollapse, sidebarCollapseToggle, blogName, setBlogName, blogCategory, setBlogCategory, blog, setBlog, imgUrl, setImgUrl,singleUser,getDate,postDataUpdate}}>
             {children}
         </GlobalContextProvider.Provider>
     )
