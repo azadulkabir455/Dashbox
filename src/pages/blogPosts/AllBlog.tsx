@@ -71,7 +71,7 @@ export default function AllBlog() {
         </div>
       </div>
       <div className="contentArea mt-5">
-        <div className="row">
+        <div className="row g-4">
           {
             isGrid &&
             posts.map((post: any) =>
@@ -92,7 +92,7 @@ export default function AllBlog() {
 
                         </div>
                         <div className="authorContent ms-2">
-                          <p className="m-0 text-capitalize">{post.user?.name}<small className='text-primary fw-semibold'>({post.user?.role})</small> </p>
+                          <p className="m-0 text-capitalize">{post.user?.name}<small className='text-primary fw-semibold ps-1 mt-1'>({post.user?.role})</small> </p>
                           <small className='text-muted'>{post.date && getDate(new Date(post.date.seconds * 1000))}</small>
                         </div>
                       </div>

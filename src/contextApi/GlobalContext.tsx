@@ -29,7 +29,7 @@ const GlobalContextConsumer = ({ children }: ContextApiChildrenType) => {
     // Function for getting date
     const getDate = (date: any) => {
         const year = date.getFullYear();
-        const month = date.getMonth();
+        const month = date.getMonth() + 1;
         const day = date.getDate();
         const houre = date.getHours();
         const min = date.getMinutes();

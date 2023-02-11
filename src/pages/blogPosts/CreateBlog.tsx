@@ -9,7 +9,7 @@ import "../../assets/css/blogPost.scss"
 import PostForm from "./blogComponent/PostForm";
 
 export default function CreateBlog() {
-  const { blogName, blogCategory, blog, imgUrl, setImgUrl }: any = useContext(GlobalContextProvider);
+  const { blogName, blogCategory, blog, imgUrl, setImgUrl,singleUser }: any = useContext(GlobalContextProvider);
 
   const deleteImg = () => {
     const imgRef = ref(storage, imgUrl)
@@ -18,6 +18,7 @@ export default function CreateBlog() {
       console.log("Image delete successfully")
     })
   }
+  console.log("Hi",singleUser)
   return (
     <>
       <div className="row my-4">
@@ -48,10 +49,14 @@ export default function CreateBlog() {
               </div>
               <div className="blogInfo mt-3 px-3 d-flex justify-content-between align-items-center ">
                 <div className="userInfo d-flex align-items-center">
-                  <img src="https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png" alt="" className="rounded-circle border border-primary border-2" />
+                  {
+                    singleUser.imgUrl?
+                    <img src={singleUser.imgUrl} alt="" className="rounded-circle border border-primary border-2" />:
+                    <img src="https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png" alt="" className="rounded-circle border border-primary border-2" />
+                  }
                   <div className="userContent ms-2">
-                    <h6 className="m-0 fw-semibold">Azad Ul Kabir</h6>
-                    <small className="text-muted">admin</small>
+                    <h6 className="m-0 fw-semibold">{singleUser.name}</h6>
+                    <small className="text-muted">{singleUser.role}</small>
                   </div>
                 </div>
                 <span className="blogCategory badge rounded-pill bg-info text-capitalize">
