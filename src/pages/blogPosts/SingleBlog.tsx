@@ -4,13 +4,14 @@ import { useSelector } from 'react-redux';
 import { GlobalContextProvider } from '../../contextApi/GlobalContext';
 import "../../assets/css/blogPost.scss";
 import LikeComponent from '../../components/likes/LikeComponent';
+import { BsX } from "react-icons/bs";
+import CommentComponent from '../../components/comments/CommentComponent';
 
 export default function SingleBlog() {
     const { id } = useParams();
     const { posts, loading } = useSelector((state: any) => state.post)
     const singlePost = posts && posts.filter((post: any) => post.id === id)[0];
-
-    console.log(posts, "hi", singlePost)
+    const comments = singlePost && singlePost.comments;
 
     const { getDate }: any = useContext(GlobalContextProvider);
 
@@ -42,6 +43,7 @@ export default function SingleBlog() {
                         <p className="text-muted ">{singlePost.blog}</p>
                     </div>
             }
+            <CommentComponent postId={id} commentCategory="blogs" comments={comments}/>
         </>
     )
 }
