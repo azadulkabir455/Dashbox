@@ -7,6 +7,7 @@ import { useDispatch } from 'react-redux';
 import { deletePost } from '../../store/reducers/postReducer';
 import { GlobalContextProvider } from '../../contextApi/GlobalContext';
 import "../../assets/css/blogPost.scss"
+import LikeComponent from '../../components/likes/LikeComponent';
 
 
 export default function AllBlog() {
@@ -109,7 +110,7 @@ export default function AllBlog() {
                   </div>
                   <div className="card-footer d-flex justify-content-between">
                     <div className="activity d-flex">
-                      <p className='me-3 text-muted m-0'><BsFillHeartFill /> 20</p>
+                      <LikeComponent postId={post.id} userLikes={post.likes} dataCategory="blogs"/>
                       <p className='text-muted m-0'><BsChatLeftTextFill /> 3</p>
                     </div>
                     <div className="actions">
