@@ -55,7 +55,6 @@ const GlobalContextConsumer = ({ children }: ContextApiChildrenType) => {
     useEffect(() => {
         dispatch(getPosts());
     },[postUpdate])
-    console.log("Posts",postUpdate,sidebarCollapse)
     return (
         <GlobalContextProvider.Provider value={{ sidebarCollapse, sidebarCollapseToggle, blogName, setBlogName, blogCategory, setBlogCategory, blog, setBlog, imgUrl, setImgUrl,singleUser,getDate,postDataUpdate}}>
             {children}

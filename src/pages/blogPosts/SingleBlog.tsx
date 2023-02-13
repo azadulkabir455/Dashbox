@@ -14,7 +14,6 @@ export default function SingleBlog() {
     const comments = singlePost && singlePost.comments;
 
     const { getDate }: any = useContext(GlobalContextProvider);
-
     return (
         <>
             {
@@ -43,7 +42,10 @@ export default function SingleBlog() {
                         <p className="text-muted ">{singlePost.blog}</p>
                     </div>
             }
-            <CommentComponent postId={id} commentCategory="blogs" comments={comments}/>
+            {
+                comments &&
+                <CommentComponent postId={id} actionDatabase="blogs" comments={comments} />
+            }
         </>
     )
 }
